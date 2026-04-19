@@ -1,101 +1,86 @@
 import random
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Base, Department, Teacher, Classroom, ClassGroup, Course
+from models import Base, Department, Teacher, Classroom, ClassGroup, Course, SystemSetting
 import time
 
 DATABASE_URL = "postgresql://admin:secretpassword@localhost:15432/course_schedule"
 
-def get_db_engine():
-    retries = 5
-    while retries > 0:
-        try:
-            engine = create_engine(DATABASE_URL)
-            engine.connect()
-            return engine
-        except Exception:
-            time.sleep(2)
-            retries -= 1
-    raise Exception("無法連線至資料庫")
-
 def init_mock_data():
-    engine = get_db_engine()
+    engine = create_engine(DATABASE_URL)
     SessionLocal = sessionmaker(bind=engine)
+    
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
 
-    print("重新建立不分年級、只分班級的課程資料...")
+    print("正在執行【大一專屬勞作教育】資料重置...")
 
     dept = Department(name="資通工程系")
     db.add(dept)
     db.commit()
 
-    teachers = [
-        Teacher(name="系主任", title="教授", is_director=True, department_id=dept.id),
-        Teacher(name="李教授", title="教授", department_id=dept.id),
-        Teacher(name="陳副教授", title="副教授", department_id=dept.id),
-        Teacher(name="林助理教授", title="助理教授", department_id=dept.id),
-        Teacher(name="張老師", title="講師", department_id=dept.id),
-        Teacher(name="黃老師", title="講師", department_id=dept.id),
-        Teacher(name="趙教授", title="教授", department_id=dept.id),
-        Teacher(name="孫老師", title="講師", department_id=dept.id),
-        Teacher(name="周教授", title="教授", department_id=dept.id), # 新增師資
-        Teacher(name="郭老師", title="講師", department_id=dept.id) # 新增師資
-    ]
+    teachers = [Teacher(name=f"教授{i:02d}", title="教授", department_id=dept.id) for i in range(15)]
+    teachers[0].name = "系主任"; teachers[0].is_director = True
     db.add_all(teachers)
     db.commit()
 
-    # 增加班級為 3 個，攤提課程壓力
     classes = [
-        ClassGroup(name="資通A班", department_id=dept.id),
-        ClassGroup(name="資通B班", department_id=dept.id),
-        ClassGroup(name="資通C班", department_id=dept.id)
+        ClassGroup(name="資通一A", department_id=dept.id),
+        ClassGroup(name="資通二A", department_id=dept.id),
+        ClassGroup(name="資通三A", department_id=dept.id),
+        ClassGroup(name="資通四A", department_id=dept.id)
     ]
     db.add_all(classes)
     db.commit()
 
-    rooms = [
-        Classroom(name="101普通教室", room_type="一般"),
-        Classroom(name="102普通教室", room_type="一般"),
-        Classroom(name="103普通教室", room_type="一般"),
-        Classroom(name="電腦教室A", room_type="電腦"),
-        Classroom(name="電腦教室B", room_type="電腦"),
-        Classroom(name="電腦教室C", room_type="電腦"),
+    db.add_all([
+        Classroom(name="101大教室", room_type="一般"),
+        Classroom(name="電算中心A", room_type="電腦"),
         Classroom(name="體育館", room_type="體育"),
-        Classroom(name="專題研討室", room_type="專題"),
-    ]
-    db.add_all(rooms)
-    db.commit()
-
-    # 調整課程池 (精簡核心課程，確保主任每班只教一門核心，其餘分配出去)
-    curriculum_pool = [
-        ("計算機概論", 3, "電腦", 0), # 系主任教 A,B,C 班的計概 (共 9 節)
-        ("作業系統實務", 3, "電腦", 1), # 改由李教授教
-        ("實務專題", 3, "專題", 0),    # 系主任教專題 (共 9 節)
-        ("微積分", 3, "一般", 2),
-        ("通訊網路概論", 3, "電腦", 3),
-        ("數位邏輯", 3, "電腦", 4),
-        ("資料結構", 3, "電腦", 5),
-        ("勞作教育", 1, "一般", 6),
-        ("體育", 2, "體育", 7),
-        ("英文", 2, "一般", 8),
-        ("通識課程", 2, "一般", 9),
-    ]
-
-    for class_obj in classes:
-        for name, credits, r_type, t_idx in curriculum_pool:
-            db.add(Course(
-                name=name,
-                credits=credits,
-                room_type_required=r_type,
-                teacher_id=teachers[t_idx].id,
-                class_group_id=class_obj.id
-            ))
+        Classroom(name="專題室", room_type="專題"),
+    ])
     
+    db.add(SystemSetting(
+        ge_zone_day=0, 
+        ge_zone_slots="5,6,7,8", 
+        midweek_limit_enabled=True,
+        midweek_allowed_slots="2,3,4,5,6,7"
+    ))
     db.commit()
-    print(f"✅ 成功匯入資通A班與B班共 {len(curriculum_pool)*2} 門課程！")
+
+    # --- 課程分配 ---
+    # 1. 只有大一 (資通一A) 有勞作教育
+    labor = Course(
+        name="勞作教育", 
+        credits=1, 
+        room_type_required="一般", 
+        teacher_id=teachers[4].id,
+        allowed_slots="1,8"
+    )
+    labor.classes = [classes[0]]
+    db.add(labor)
+
+    # 2. 其它專業課
+    # 大一
+    y1 = [("計概", 3, "電腦", 0), ("微積分", 3, "一般", 1), ("英文(一)", 2, "一般", 2)]
+    # 大二
+    y2 = [("AI概論", 2, "電腦", 8), ("數位邏輯", 3, "電腦", 9)]
+    # 大三
+    y3 = [("專題(一)", 3, "專題", 0), ("資通安全", 3, "一般", 14)]
+
+    def add_batch(data, class_obj):
+        for name, credits, r_type, t_idx in data:
+            c = Course(name=name, credits=credits, room_type_required=r_type, teacher_id=teachers[t_idx].id)
+            db.add(c); db.flush(); c.classes = [class_obj]
+
+    add_batch(y1, classes[0])
+    add_batch(y2, classes[1])
+    add_batch(y3, classes[2])
+
+    db.commit()
     db.close()
+    print("✅ 資料匯入完成：勞作教育僅限大一，且支援多對多班級關聯。")
 
 if __name__ == "__main__":
     init_mock_data()

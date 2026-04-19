@@ -3,332 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>南亞技術學院 - 自動排課系統</title>
+    <title>南亞技術學院 - 自動排課系統 Pro</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg: #f8fafc;
-            --sidebar-bg: #1e293b;
-            --card-bg: #ffffff;
-            --border: #e2e8f0;
-            --text-dark: #0f172a;
-            --text-light: #f8fafc;
-            --danger: #ef4444;
-            --success: #22c55e;
+            --primary: #2563eb; --primary-hover: #1d4ed8; --bg: #f8fafc; --sidebar-bg: #1e293b; --card-bg: #ffffff;
+            --border: #e2e8f0; --text-dark: #0f172a; --text-light: #f8fafc; --danger: #ef4444; --success: #22c55e;
             --restricted: #fee2e2;
         }
-
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft JhengHei", sans-serif; background-color: var(--bg); color: var(--text-dark); margin: 0; display: flex; height: 100vh; overflow: hidden; }
         #main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative; }
         #sidebar { width: 280px; background-color: var(--sidebar-bg); color: var(--text-light); display: flex; flex-direction: column; transition: width 0.3s; flex-shrink: 0; border-left: 1px solid #334155; }
         #sidebar.collapsed { width: 0; border-left: none; overflow: hidden; }
-
         .sidebar-header { padding: 20px; font-size: 1.1rem; font-weight: bold; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
         .sidebar-content { flex-grow: 1; overflow-y: auto; padding: 10px; }
         .teacher-item { padding: 12px 15px; margin-bottom: 8px; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; border: 1px solid transparent; }
         .teacher-item:hover { background-color: #334155; }
         .teacher-item.active { background-color: var(--primary); color: white; transform: translateX(-5px); box-shadow: -4px 0 0 white; }
         .teacher-hours { font-size: 0.85rem; font-weight: bold; color: #94a3b8; }
-
         .toggle-btn { position: fixed; right: 20px; bottom: 20px; z-index: 100; width: 55px; height: 55px; border-radius: 50%; background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.4rem; border: none; }
-        
         header { background: var(--card-bg); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .actions { display: flex; gap: 10px; align-items: center; }
-
         .config-bar { background: #fff; padding: 10px 30px; border-bottom: 1px solid var(--border); display: flex; gap: 20px; align-items: center; font-size: 0.9rem; }
-        .config-bar select, .config-bar input { padding: 5px; border-radius: 4px; border: 1px solid var(--border); }
-
+        .config-bar input { padding: 5px; border-radius: 4px; border: 1px solid var(--border); }
         .content-body { flex-grow: 1; padding: 20px; }
-        #printArea { background: white; padding: 30px; border-radius: 8px; max-width: 900px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-
+        #printArea { background: white; padding: 30px; border-radius: 8px; max-width: 1000px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         .print-header { text-align: center; margin-bottom: 30px; display: none; }
-        .print-header h1 { margin: 0; font-size: 2rem; color: #000; letter-spacing: 2px; }
-        .print-header h2 { margin: 10px 0; font-size: 1.3rem; color: #333; }
-
         .schedule-grid { display: grid; grid-template-columns: auto repeat(5, 1fr); gap: 1px; background-color: #000; border: 1px solid #000; }
         .grid-header { background-color: #f3f4f6; padding: 12px 5px; text-align: center; font-weight: bold; border: 1px solid #000; font-size: 0.95rem; white-space: nowrap; }
         .grid-cell { background-color: #fff; min-height: 100px; padding: 5px; font-size: 0.85rem; border: 1px solid #000; position: relative; overflow: hidden; }
         .slot-label { background-color: #f3f4f6; display: flex; align-items: center; justify-content: center; font-weight: bold; white-space: nowrap; padding: 0 10px; }
-
-        .course-card { height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center; gap: 2px; transition: all 0.2s; }
+        .course-card { height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center; gap: 2px; transition: all 0.2s; background-color: #dbeafe; border-left: 4px solid var(--primary); padding: 4px; border-radius: 4px; }
         .course-name { font-weight: 800; color: #000; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .teacher-name, .room-name, .class-name { color: #333; font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
         .restricted { color: #ccc; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; text-align: center; font-style: italic; }
-
         button { padding: 8px 16px; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; }
         .btn-primary { background: var(--primary); color: white; }
+        .btn-secondary { background: #64748b; color: white; }
         .btn-success { background: var(--success); color: white; }
-
         #dbModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; }
-        .modal-content { background: white; padding: 30px; border-radius: 12px; width: 1100px; max-height: 90vh; overflow: hidden; display: flex; flex-direction: column; }
-        
-        /* 管理分頁標籤優化 */
+        .modal-content { background: white; padding: 30px; border-radius: 12px; width: 1200px; max-height: 95vh; overflow: hidden; display: flex; flex-direction: column; }
         .tab-btn { padding: 10px 25px; cursor: pointer; border-radius: 8px 8px 0 0; font-weight: bold; color: #64748b; transition: all 0.2s; border: 1px solid transparent; border-bottom: none; }
-        .tab-btn.active { color: white; background-color: var(--primary); border-color: var(--primary); box-shadow: 0 -2px 10px rgba(37,99,235,0.1); }
-        .tab-btn:hover:not(.active) { background-color: #f1f5f9; }
-
+        .tab-btn.active { color: white; background-color: var(--primary); border-color: var(--primary); }
         .editor-section { background: #f1f5f9; padding: 20px; border-radius: 0 8px 8px 8px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: end; border: 1px solid var(--border); }
         .form-group { display: flex; flex-direction: column; gap: 5px; }
         .form-group label { font-size: 0.85rem; font-weight: bold; color: #475569; }
         .form-group input, .form-group select { padding: 8px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.9rem; }
-        
-        .table-container { flex-grow: 1; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; }
+        .table-container { flex-grow: 1; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; background: white; }
         table { width: 100%; border-collapse: collapse; }
         th, td { border-bottom: 1px solid var(--border); padding: 12px; text-align: left; }
         th { background: #f8fafc; position: sticky; top: 0; z-index: 10; font-weight: bold; }
-        
         .btn-action { padding: 5px 12px; font-size: 0.8rem; border-radius: 4px; margin-right: 5px; display: inline-block; }
         .btn-edit { background: #dbeafe; color: var(--primary); }
-        .btn-edit:hover { background: var(--primary); color: white; }
         .btn-delete { background: #fee2e2; color: var(--danger); }
-        .btn-delete:hover { background: var(--danger); color: white; }
-
-        @media print {
-            @page { size: A4 portrait; margin: 10mm; }
-            body { background: white; display: block; overflow: visible; height: auto; zoom: 0.9; }
-            #sidebar, .toggle-btn, header, .config-bar, .class-selector, .no-print { display: none !important; }
-            #main-content { display: block; overflow: visible; height: auto; width: 100%; }
-            .content-body { padding: 0; }
-            #printArea { padding: 0; box-shadow: none; max-width: none; width: 100%; margin: 0 auto; transform-origin: top center; }
-            .print-header { display: block !important; }
-            .schedule-grid { grid-template-columns: 60px repeat(5, 1fr); border: 2px solid #000; }
-            .grid-cell { min-height: 90px; border: 1px solid #000; }
-            .course-name { color: #000; }
-        }
+        .pagination { display: flex; justify-content: center; align-items: center; gap: 15px; padding: 15px; background: #f8fafc; border-top: 1px solid var(--border); }
     </style>
 </head>
 <body>
-
     <div id="main-content">
         <header class="no-print">
-            <div>
-                <h1 style="margin:0; font-size:1.3rem; color:var(--primary);">🎓 南亞技術學院 - 排課系統</h1>
-                <div id="viewSubtitle" style="font-size:0.9rem; color:#64748b;">載入中...</div>
-            </div>
-            <div class="actions">
-                <button class="btn-success" onclick="window.print()">📥 匯出 PDF / 列印</button>
-                <button class="btn-secondary" onclick="openDbModal()">⚙️ 資料管理</button>
-                <button class="btn-primary" id="runBtn">🚀 一鍵自動排課</button>
-            </div>
+            <div><h1 style="margin:0; font-size:1.3rem; color:var(--primary);">🎓 南亞技術學院 - 排課系統</h1><div id="viewSubtitle" style="font-size:0.9rem; color:#64748b;">載入中...</div></div>
+            <div class="actions"><button class="btn-success" onclick="window.print()">📥 匯出 PDF / 列印</button><button class="btn-secondary" onclick="openDbModal()">⚙️ 資料管理</button><button class="btn-primary" id="runBtn">🚀 一鍵自動排課</button></div>
         </header>
-
-        <div class="config-bar no-print">
-            <strong>📅 學期設定：</strong>
-            <label>學年度：<input type="number" id="cfg_year" value="113" oninput="updatePrintTitle()"> 學年度</label>
-            <label>學期：
-                <select id="cfg_term" onchange="updatePrintTitle()">
-                    <option value="第 1 學期" selected>第 1 學期</option>
-                    <option value="第 2 學期">第 2 學期</option>
-                </select>
-            </label>
-        </div>
-
-        <div class="content-body">
-            <div id="classSelector" class="class-selector no-print"></div>
-            <div id="printArea">
-                <div class="print-header"><h1>南亞技術學院</h1><h2 id="printFullTitle">113 學年度 第 1 學期 - 課表</h2></div>
-                <div id="scheduleContainer"></div>
-            </div>
-        </div>
+        <div class="config-bar no-print"><strong>📅 學期設定：</strong><label>學年度：<input type="number" id="cfg_year" value="113" oninput="updatePrintTitle()"> 學年度</label><label>學期：<select id="cfg_term" onchange="updatePrintTitle()"><option value="第 1 學期">第 1 學期</option><option value="第 2 學期">第 2 學期</option></select></label></div>
+        <div class="content-body"><div id="classSelector" class="class-selector no-print"></div><div id="printArea"><div class="print-header"><h1>南亞技術學院</h1><h2 id="printFullTitle">...</h2></div><div id="scheduleContainer"></div></div></div>
         <button class="toggle-btn no-print" onclick="toggleSidebar()">📊</button>
     </div>
-
-    <div id="sidebar" class="collapsed no-print">
-        <div class="sidebar-header"><span>👨‍🏫 教師統計</span><button onclick="toggleSidebar()" style="background:none; color:white; font-size:1.2rem; cursor:pointer; border:none;">&times;</button></div>
-        <div class="sidebar-content" id="teacherList"></div>
-    </div>
-
+    <div id="sidebar" class="collapsed no-print"><div class="sidebar-header"><span>👨‍🏫 教師統計</span><button onclick="toggleSidebar()" style="background:none; color:white; font-size:1.2rem; cursor:pointer;">&times;</button></div><div class="sidebar-content" id="teacherList"></div></div>
+    
     <div id="dbModal" class="no-print">
         <div class="modal-content">
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><h2>⚙️ 資料管理</h2><button onclick="closeDbModal()" style="background:none; font-size:1.5rem; cursor:pointer; border:none;">&times;</button></div>
-            <div style="display:flex; gap:5px; margin-bottom:0px;">
-                <div class="tab-btn active" id="tab-teachers" onclick="switchTab('teachers')">老師</div>
-                <div class="tab-btn" id="tab-courses" onclick="switchTab('courses')">課程</div>
-                <div class="tab-btn" id="tab-classrooms" onclick="switchTab('classrooms')">教室</div>
-                <div class="tab-btn" id="tab-classes" onclick="switchTab('classes')">班級</div>
-            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><h2>⚙️ 資料管理</h2><button onclick="closeDbModal()" style="background:none; font-size:1.5rem; cursor:pointer;">&times;</button></div>
+            <div style="display:flex; gap:5px;"><div class="tab-btn active" id="tab-teachers" onclick="switchTab('teachers')">老師</div><div class="tab-btn" id="tab-courses" onclick="switchTab('courses')">課程</div><div class="tab-btn" id="tab-classrooms" onclick="switchTab('classrooms')">教室</div><div class="tab-btn" id="tab-classes" onclick="switchTab('classes')">班級</div><div class="tab-btn" id="tab-rules" onclick="switchTab('rules')" style="color:var(--danger);">⚖️ 排課規則</div></div>
             <div id="editorArea" class="editor-section"></div>
             <div class="table-container"><table id="dbTable"><thead><tr id="tableHead"></tr></thead><tbody id="tableBody"></tbody></table></div>
+            <div id="paginationArea" class="pagination"></div>
         </div>
     </div>
 
     <script>
-        let allSchedules = [];
-        let allData = { teachers: [], courses: [], classrooms: [], class_groups: [] };
-        let currentClass = "";
-        let currentTeacher = null;
-        let viewMode = 'class';
-        let currentTab = 'teachers';
-        let editingId = null;
-
+        let allSchedules = []; let allData = { teachers: [], courses: [], classrooms: [], class_groups: [], settings: {} };
+        let currentClass = ""; let currentTeacher = null; let viewMode = 'class'; let currentTab = 'teachers'; let editingId = null;
+        let currentPage = 1; const pageSize = 10;
         const days = ["週一", "週二", "週三", "週四", "週五"];
-        const slots = [1, 2, 3, 4, 5, 6, 7, 8];
 
-        async function fetchData() {
-            try {
-                const res = await fetch('http://localhost:9000/api/data');
-                allData = await res.json();
-                renderTeacherSidebar(); renderClassSelector(); updatePrintTitle();
-            } catch(e) { console.error(e); }
+        async function fetchData() { 
+            try { 
+                const res = await fetch('http://127.0.0.1:9000/api/data'); 
+                allData = await res.json(); 
+                if (!currentClass && allData.class_groups.length > 0) {
+                    currentClass = allData.class_groups[0].name;
+                }
+                renderTeacherSidebar(); 
+                renderClassSelector(); 
+                updatePrintTitle(); 
+                renderSchedule();
+            } catch(e) { console.error(e); } 
         }
-
-        async function fetchSchedule() {
-            try {
-                const res = await fetch('http://localhost:9000/api/schedule');
-                allSchedules = await res.json();
-                renderTeacherSidebar(); renderSchedule();
-            } catch(e) { console.error(e); }
-        }
-
+        async function fetchSchedule() { try { const res = await fetch('http://127.0.0.1:9000/api/schedule'); allSchedules = await res.json(); renderTeacherSidebar(); renderSchedule(); } catch(e) { console.error(e); } }
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('collapsed'); }
-
-        function renderTeacherSidebar() {
-            const container = document.getElementById('teacherList');
-            let filtered = allSchedules;
-            if (viewMode === 'class' && currentClass) filtered = allSchedules.filter(s => s.class_name === currentClass);
-            const stats = {};
-            filtered.forEach(s => stats[s.teacher_name] = (stats[s.teacher_name] || 0) + s.duration);
-            const sorted = [...allData.teachers].sort((a, b) => (stats[b.name] || 0) - (stats[a.name] || 0));
-            container.innerHTML = sorted.map(t => `<div class="teacher-item ${currentTeacher === t.name ? 'active' : ''}" onclick="selectTeacher('${t.name}')"><span>👤 ${t.name}</span><span class="teacher-hours">${stats[t.name] || 0} 節</span></div>`).join('');
-        }
-
-        function renderClassSelector() {
-            const container = document.getElementById('classSelector');
-            if (viewMode !== 'class') { container.innerHTML = `<button class="btn-secondary" onclick="setViewMode('class')">🔙 返回班級視角</button>`; return; }
-            container.innerHTML = allData.class_groups.map(c => `<button class="class-btn ${c.name === currentClass ? 'active' : ''}" onclick="selectClass('${c.name}')">${c.name}</button>`).join('');
-            if (!currentClass && allData.class_groups.length > 0) selectClass(allData.class_groups[0].name);
-        }
-
-        function selectClass(name) { viewMode = 'class'; currentClass = name; currentTeacher = null; updatePrintTitle(); renderClassSelector(); renderTeacherSidebar(); renderSchedule(); }
-        function selectTeacher(name) { viewMode = 'teacher'; currentTeacher = name; updatePrintTitle(); renderClassSelector(); renderTeacherSidebar(); renderSchedule(); }
-        function setViewMode(mode) { viewMode = mode; currentTeacher = null; updatePrintTitle(); renderClassSelector(); renderTeacherSidebar(); renderSchedule(); }
         
         function updatePrintTitle() {
-            const year = document.getElementById('cfg_year').value;
-            const term = document.getElementById('cfg_term').value;
             const target = viewMode === 'class' ? (currentClass || '...') : `👤 ${currentTeacher}`;
-            document.getElementById('printFullTitle').innerText = `${year} 學年度 ${term} - ${target} 課表`;
+            document.getElementById('printFullTitle').innerText = `${document.getElementById('cfg_year').value} 學年度 ${document.getElementById('cfg_term').value} - ${target} 課表`;
             document.getElementById('viewSubtitle').innerText = `目前顯示：${target} 課表`;
         }
 
         function renderSchedule() {
-            const container = document.getElementById('scheduleContainer');
-            if (!allSchedules || allSchedules.length === 0) { container.innerHTML = "<div style='text-align:center; padding:50px; background:white; border-radius:12px;'>目前無課表資料。</div>"; return; }
-            let html = '<div class="schedule-grid"><div class="grid-header">節次</div>';
-            days.forEach(d => html += `<div class="grid-header">${d}</div>`);
-            slots.forEach(slot => {
+            const container = document.getElementById('scheduleContainer'); if (!allSchedules || allSchedules.length === 0) return;
+            let html = '<div class="schedule-grid"><div class="grid-header">節次</div>' + days.map(d => `<div class="grid-header">${d}</div>`).join('');
+            for(let slot=1; slot<=8; slot++) {
                 html += `<div class="grid-cell slot-label">第 ${slot} 節</div>`;
-                for (let day = 0; day < 5; day++) {
-                    const restriction = (day === 4) ? "不排課" : (day === 3 && slot >= 5) ? "不排課" : (day === 0 && slot >= 5 && viewMode === 'class') ? "通識專用" : null;
-                    const course = allSchedules.find(s => (viewMode === 'class' ? s.class_name === currentClass : s.teacher_name === currentTeacher) && s.day === day && slot >= s.slot && slot < s.slot + s.duration);
-                    if (course) {
-                        const isStart = course.slot === slot;
-                        html += `<div class="grid-cell"><div class="course-card" style="${!isStart ? 'opacity:0.7;' : ''}">
-                            <span class="course-name">${course.course_name}</span>
-                            <span class="teacher-name">${course.teacher_name}</span><span class="class-name">${course.class_name}</span><span class="room-name">${course.room_name}</span>
-                        </div></div>`;
-                    } else if (restriction) { html += `<div class="grid-cell restricted">${restriction}</div>`; }
-                    else { html += `<div class="grid-cell"></div>`; }
+                for(let day=0; day<5; day++) {
+                    const s = allData.settings || {}; let restriction = null;
+                    if (day === 4 && s.friday_all_day_off) restriction = "不排課";
+                    if (day === 3 && slot >= 5 && s.thursday_afternoon_off) restriction = "不排課";
+                    if (s.midweek_limit_enabled && [1, 2, 3].includes(day)) {
+                        const allowed = (s.midweek_allowed_slots || "").split(",").includes(slot.toString());
+                        if (!allowed) restriction = "時段限制";
+                    }
+                    if (day === s.ge_zone_day && (s.ge_zone_slots || "").split(",").includes(slot.toString()) && viewMode === 'class') {
+                        html += `<div class="grid-cell" style="background-color:#f1f5f9;"><div class="course-card" style="background-color:#e2e8f0; border-left:4px solid #94a3b8; opacity:0.8;"><span class="course-name" style="color:#475569;">通識時段</span><span class="teacher-name" style="color:#64748b;">(學生自選)</span></div></div>`;
+                        continue;
+                    }
+                    const borderStyle = slot === 4 ? 'border-bottom: 4px solid var(--sidebar-bg);' : '';
+                    const course = allSchedules.find(x => (viewMode === 'class' ? x.class_name === currentClass : x.teacher_name === currentTeacher) && x.day === day && slot >= x.slot && slot < x.slot + x.duration);
+                    if (course) { 
+                        const isStart = course.slot === slot; 
+                        html += `<div class="grid-cell" style="${borderStyle}"><div class="course-card" style="${!isStart ? 'opacity:0.7;' : ''}"><span class="course-name">${course.course_name}</span><span class="teacher-name">${course.teacher_name}</span><span class="class-name">${course.class_name}</span><span class="room-name">${course.room_name}</span></div></div>`; 
+                    } else if (restriction) { 
+                        html += `<div class="grid-cell restricted" style="${borderStyle}">${restriction}</div>`; 
+                    } else { 
+                        html += `<div class="grid-cell" style="${borderStyle}"></div>`; 
+                    }
                 }
-            });
+            }
             container.innerHTML = html + '</div>';
         }
 
         document.getElementById('runBtn').onclick = async () => {
-            const btn = document.getElementById('runBtn'); btn.disabled = true; btn.innerText = "⏳ 運算中...";
-            try { const res = await fetch('http://localhost:9000/api/run-scheduler', { method: 'POST' }); const data = await res.json(); if (!data) alert("無方案"); else { allSchedules = data; renderTeacherSidebar(); renderSchedule(); }
-            } catch (e) { alert("失敗"); } finally { btn.disabled = false; btn.innerText = "🚀 一鍵自動排課"; }
+            const btn = document.getElementById('runBtn'); 
+            btn.disabled = true; 
+            btn.innerText = "⏳ 運算中...";
+            try { 
+                const res = await fetch('http://127.0.0.1:9000/api/run-scheduler', { method: 'POST' }); 
+                const data = await res.json(); 
+                if (data.error) {
+                    alert(data.error); 
+                } else { 
+                    allSchedules = data; 
+                    renderTeacherSidebar(); 
+                    renderSchedule(); 
+                    alert("✅ 排課成功！");
+                } 
+            } catch (e) { 
+                console.error(e);
+                alert("❌ 連線失敗：請確認後端 python main.py 是否正在執行。"); 
+            } finally { 
+                btn.disabled = false; 
+                btn.innerText = "🚀 一鍵自動排課"; 
+            }
         };
 
         function openDbModal() { document.getElementById('dbModal').style.display = 'flex'; switchTab('teachers'); }
         function closeDbModal() { document.getElementById('dbModal').style.display = 'none'; fetchData(); }
-
-        function switchTab(tab) {
-            currentTab = tab; editingId = null;
-            ['teachers', 'courses', 'classrooms', 'classes'].forEach(t => document.getElementById('tab-' + t).className = 'tab-btn' + (tab === t ? ' active' : ''));
-            renderEditor(); renderTable();
+        
+        function switchTab(tab) { 
+            currentTab = tab; editingId = null; currentPage = 1; 
+            ['teachers', 'courses', 'classrooms', 'classes', 'rules'].forEach(t => document.getElementById('tab-' + t).className = 'tab-btn' + (tab === t ? ' active' : '')); 
+            renderEditor(); renderTable(); 
         }
 
         function renderEditor() {
-            const area = document.getElementById('editorArea');
+            const area = document.getElementById('editorArea'); 
+            const types = [...new Set(allData.classrooms.map(r => r.room_type)), "一般", "電腦"];
+            const typeDatalist = `<datalist id="roomTypesList">${types.map(t => `<option value="${t}">`).join('')}</datalist>`;
             
-            // 取得目前已存在的所有教室類型，作為建議清單
-            const existingTypes = [...new Set(allData.classrooms.map(r => r.room_type))];
-            if (!existingTypes.includes("一般")) existingTypes.push("一般");
-            if (!existingTypes.includes("電腦")) existingTypes.push("電腦");
-            
-            const typeDatalist = `<datalist id="roomTypesList">${existingTypes.map(t => `<option value="${t}">`).join('')}</datalist>`;
-
-            if (currentTab === 'teachers') {
-                area.innerHTML = `<div class="form-group"><label>老師姓名</label><input type="text" id="t_name"></div><div class="form-group"><label>職位職稱</label><select id="t_title"><option value="一般教師">一般教師</option><option value="通識教師">通識教師</option><option value="專業教師">專業教師</option></select></div><div class="form-group"><label>屬性</label><select id="t_is_dir"><option value="false">非系主任</option><option value="true">⭐ 系主任</option></select></div><div style="display:flex; gap:10px;"><button class="btn-primary" onclick="saveItem('teachers')">儲存</button>${editingId ? '<button onclick="cancelEdit()">取消</button>' : ''}</div>`;
+            if (currentTab === 'teachers') { 
+                area.innerHTML = `<div class="form-group"><label>老師姓名</label><input type="text" id="t_name"></div><div class="form-group"><label>職位</label><select id="t_title"><option value="一般教師">一般教師</option><option value="專業教師">專業教師</option></select></div><div class="form-group"><label>系主任</label><select id="t_is_dir"><option value="false">否</option><option value="true">是</option></select></div><div style="display:flex; gap:10px;"><button class="btn-primary" onclick="saveItem('teachers')">儲存</button></div>`; 
             } else if (currentTab === 'courses') {
+                const classCheckboxes = allData.class_groups.map(g => `<label style="display:flex; align-items:center; gap:5px; font-weight:normal;"><input type="checkbox" name="c_classes" value="${g.id}"> ${g.name}</label>`).join('');
                 area.innerHTML = `
                     <div class="form-group"><label>課名</label><input type="text" id="c_name"></div>
-                    <div class="form-group"><label>學分</label><input type="number" id="c_credits" value="3"></div>
+                    <div class="form-group"><label>學分</label><input type="number" id="c_credits"></div>
                     <div class="form-group"><label>老師</label><select id="c_teacher">${allData.teachers.map(t=>`<option value="${t.id}">${t.name}</option>`).join('')}</select></div>
-                    <div class="form-group"><label>班級</label><select id="c_class">${allData.class_groups.map(g=>`<option value="${g.id}">${g.name}</option>`).join('')}</select></div>
-                    <div class="form-group"><label>所需教室類型 (可自填)</label>
-                        <input type="text" id="c_room" list="roomTypesList" placeholder="選擇或輸入新類型">
-                        ${typeDatalist}
-                    </div>
-                    <div style="display:flex; gap:10px;"><button class="btn-primary" onclick="saveItem('courses')">儲存</button>${editingId ? '<button onclick="cancelEdit()">取消</button>' : ''}</div>`;
-            } else if (currentTab === 'classrooms') {
+                    <div class="form-group" style="grid-column: 1 / -1;"><label>適用班級 (多選)</label><div style="display:flex; flex-wrap:wrap; gap:10px; padding:10px; background:white; border-radius:4px; border:1px solid var(--border);">${classCheckboxes}</div></div>
+                    <div class="form-group"><label>教室類型</label><input type="text" id="c_room" list="roomTypesList">${typeDatalist}</div>
+                    <div class="form-group"><label>課程特許節次 (選填)</label><input type="text" id="c_allowed" placeholder="例如 1,8"></div>
+                    <div class="form-group"><label>希望起始天</label><select id="c_fday"><option value="">自動</option>${[1,2,3,4,5].map(i=>`<option value="${i}">週${days[i-1].slice(1)}</option>`).join('')}</select></div>
+                    <div class="form-group"><label>希望起始節次</label><select id="c_fslot"><option value="">自動</option>${[1,2,3,4,5,6,7,8].map(i=>`<option value="${i}">第 ${i} 節</option>`).join('')}</select></div>
+                    <div style="display:flex; gap:10px; grid-column: 1 / -1;"><button class="btn-primary" onclick="saveItem('courses')">儲存</button></div>`;
+            } else if (currentTab === 'classrooms') { 
+                area.innerHTML = `<div class="form-group"><label>教室名</label><input type="text" id="r_name"></div><div class="form-group"><label>類型</label><input type="text" id="r_type" list="roomTypesList">${typeDatalist}</div><div style="display:flex; gap:10px;"><button class="btn-primary" onclick="saveItem('classrooms')">儲存</button></div>`; 
+            } else if (currentTab === 'classes') { 
+                area.innerHTML = `<div class="form-group"><label>班級名</label><input type="text" id="g_name"></div><div class="form-group"><label>預設教室</label><select id="g_room"><option value="">無</option>${allData.classrooms.map(r=>`<option value="${r.id}">${r.name}</option>`).join('')}</select></div><div style="display:flex; gap:10px;"><button class="btn-primary" onclick="saveItem('classes')">儲存</button></div>`; 
+            } else if (currentTab === 'rules') {
+                const s = allData.settings || {};
                 area.innerHTML = `
-                    <div class="form-group"><label>教室名</label><input type="text" id="r_name"></div>
-                    <div class="form-group"><label>類別 (可自填新類別)</label>
-                        <input type="text" id="r_type" list="roomTypesList" placeholder="選擇或輸入新類別">
-                        ${typeDatalist}
-                    </div>
-                    <div style="display:flex; gap:10px;"><button class="btn-primary" onclick="saveItem('classrooms')">儲存</button>${editingId ? '<button onclick="cancelEdit()">取消</button>' : ''}</div>`;
-            } else if (currentTab === 'classes') {
-                area.innerHTML = `<div class="form-group"><label>班級名</label><input type="text" id="g_name"></div><div class="form-group"><label>固定教室</label><select id="g_room"><option value="">無</option>${allData.classrooms.map(r=>`<option value="${r.id}">${r.name}</option>`).join('')}</select></div><div style="display:flex; gap:10px;"><button class="btn-primary" onclick="saveItem('classes')">儲存</button>${editingId ? '<button onclick="cancelEdit()">取消</button>' : ''}</div>`;
+                    <div class="form-group"><label>週四下午禁排</label><select id="r_thurs"><option value="true" ${s.thursday_afternoon_off?'selected':''}>啟用</option><option value="false" ${!s.thursday_afternoon_off?'selected':''}>停用</option></select></div>
+                    <div class="form-group"><label>週五全天禁排</label><select id="r_fri"><option value="true" ${s.friday_all_day_off?'selected':''}>啟用</option><option value="false" ${!s.friday_all_day_off?'selected':''}>停用</option></select></div>
+                    <div class="form-group"><label>通識天(1-5)</label><input type="number" id="r_ge_day" value="${(s.ge_zone_day || 0) + 1}"></div>
+                    <div class="form-group"><label>通識節次</label><input type="text" id="r_ge_slots" value="${s.ge_zone_slots || '5,6,7,8'}"></div>
+                    <div class="form-group"><label>勞作特許節次</label><input type="text" id="r_labor" value="${s.labor_slots || '1,8'}"></div>
+                    <div class="form-group" style="background:#fff3cd; padding:10px; border-radius:4px;"><label>⭐ 系主任禁排天</label><input type="number" id="r_dir_day" value="${(s.director_off_day||0)+1}"></div>
+                    <div class="form-group" style="background:#fff3cd; padding:10px; border-radius:4px;"><label>⭐ 系主任禁排節次</label><input type="text" id="r_dir_slots" value="${s.director_off_slots || '1,2,3,4'}"></div>
+                    <div class="form-group" style="background:#e0f2f1; padding:10px; border-radius:4px;"><label>📌 特定日子節次限制</label><select id="r_mid_en"><option value="true" ${s.midweek_limit_enabled?'selected':''}>啟用限制</option><option value="false" ${!s.midweek_limit_enabled?'selected':''}>不限制</option></select></div>
+                    <div class="form-group" style="background:#e0f2f1; padding:10px; border-radius:4px;"><label>📌 限制容許節次</label><input type="text" id="r_mid_slots" value="${s.midweek_allowed_slots || '2,3,4,5,6,7'}"></div>
+                    <div style="display:flex; gap:10px; grid-column: 1 / -1;"><button class="btn-primary" onclick="saveSettings()">💾 儲存規則</button></div>`;
             }
         }
 
         function renderTable() {
             const head = document.getElementById('tableHead'); const body = document.getElementById('tableBody');
-            if (currentTab === 'teachers') { 
-                head.innerHTML = '<th>ID</th><th>姓名</th><th>職位</th><th>屬性</th><th>操作</th>'; 
-                body.innerHTML = allData.teachers.map(t => `<tr><td>${t.id}</td><td>${t.name}</td><td>${t.title}</td><td><span style="color:${t.is_director?'var(--primary)':'#666'}">${t.is_director?'⭐ 系主任':'教師'}</span></td><td><button class="btn-action btn-edit" onclick="setEdit('teachers',${t.id})">編輯</button><button class="btn-action btn-delete" onclick="deleteItem('teachers',${t.id})">刪除</button></td></tr>`).join(''); 
+            const paginator = document.getElementById('paginationArea');
+            if (currentTab === 'rules') { head.innerHTML = ''; body.innerHTML = '<tr><td colspan="5">請在上方編輯規則。</td></tr>'; paginator.innerHTML = ''; return; }
+            
+            let data = [];
+            if (currentTab === 'teachers') data = allData.teachers;
+            else if (currentTab === 'courses') data = allData.courses;
+            else if (currentTab === 'classrooms') data = allData.classrooms;
+            else if (currentTab === 'classes') data = allData.class_groups;
+
+            // 修正：增加強制排序，避免編輯後資料位置亂跳
+            data.sort((a, b) => a.id - b.id);
+
+            const totalPages = Math.ceil(data.length / pageSize) || 1;
+            const start = (currentPage - 1) * pageSize;
+            const paged = data.slice(start, start + pageSize);
+
+            if (currentTab === 'teachers') {
+                head.innerHTML = '<th>ID</th><th>姓名</th><th>系主任</th><th>操作</th>';
+                body.innerHTML = paged.map(t => `<tr><td>${t.id}</td><td>${t.name}</td><td>${t.is_director?'是':'否'}</td><td><button class="btn-action btn-edit" onclick="setEdit('teachers',${t.id})">編輯</button><button class="btn-action btn-delete" onclick="deleteItem('teachers',${t.id})">刪除</button></td></tr>`).join('');
+            } else if (currentTab === 'courses') {
+                head.innerHTML = '<th>ID</th><th>名稱</th><th>學分</th><th>操作</th>';
+                body.innerHTML = paged.map(c => `<tr><td>${c.id}</td><td>${c.name}</td><td>${c.credits}</td><td><button class="btn-action btn-edit" onclick="setEdit('courses',${c.id})">編輯</button><button class="btn-action btn-delete" onclick="deleteItem('courses',${c.id})">刪除</button></td></tr>`).join('');
+            } else if (currentTab === 'classrooms') {
+                head.innerHTML = '<th>ID</th><th>名稱</th><th>類型</th><th>操作</th>';
+                body.innerHTML = paged.map(r => `<tr><td>${r.id}</td><td>${r.name}</td><td>${r.room_type}</td><td><button class="btn-action btn-edit" onclick="setEdit('classrooms',${r.id})">編輯</button><button class="btn-action btn-delete" onclick="deleteItem('classrooms',${r.id})">刪除</button></td></tr>`).join('');
+            } else if (currentTab === 'classes') {
+                head.innerHTML = '<th>ID</th><th>名稱</th><th>操作</th>';
+                body.innerHTML = paged.map(g => `<tr><td>${g.id}</td><td>${g.name}</td><td><button class="btn-action btn-edit" onclick="setEdit('classes',${g.id})">編輯</button><button class="btn-action btn-delete" onclick="deleteItem('classes',${g.id})">刪除</button></td></tr>`).join('');
             }
-            else if (currentTab === 'courses') { head.innerHTML = '<th>ID</th><th>名稱</th><th>學分</th><th>老師</th><th>班級</th><th>操作</th>'; body.innerHTML = allData.courses.map(c => { const t = allData.teachers.find(x => x.id === c.teacher_id); const g = allData.class_groups.find(x => x.id === c.class_group_id); return `<tr><td>${c.id}</td><td>${c.name}</td><td>${c.credits}</td><td>${t?t.name:'??'}</td><td>${g?g.name:'??'}</td><td><button class="btn-action btn-edit" onclick="setEdit('courses',${c.id})">編輯</button><button class="btn-action btn-delete" onclick="deleteItem('courses',${c.id})">刪除</button></td></tr>`; }).join(''); }
-            else if (currentTab === 'classrooms') { head.innerHTML = '<th>ID</th><th>名稱</th><th>類型</th><th>操作</th>'; body.innerHTML = allData.classrooms.map(r => `<tr><td>${r.id}</td><td>${r.name}</td><td>${r.room_type}</td><td><button class="btn-action btn-edit" onclick="setEdit('classrooms',${r.id})">編輯</button><button class="btn-action btn-delete" onclick="deleteItem('classrooms',${r.id})">刪除</button></td></tr>`).join(''); }
-            else if (currentTab === 'classes') { head.innerHTML = '<th>ID</th><th>名稱</th><th>固定教室</th><th>操作</th>'; body.innerHTML = allData.class_groups.map(g => { const r = allData.classrooms.find(x => x.id === g.default_classroom_id); return `<tr><td>${g.id}</td><td>${g.name}</td><td>${r?r.name:'-'}</td><td><button class="btn-action btn-edit" onclick="setEdit('classes',${g.id})">編輯</button><button class="btn-action btn-delete" onclick="deleteItem('classes',${g.id})">刪除</button></td></tr>`; }).join(''); }
+
+            paginator.innerHTML = `<button class="btn-secondary" onclick="changePage(-1)" ${currentPage===1?'disabled':''}>上一頁</button><span>第 ${currentPage} / ${totalPages} 頁</span><button class="btn-secondary" onclick="changePage(1)" ${currentPage===totalPages?'disabled':''}>下一頁</button>`;
         }
 
-        function cancelEdit() { editingId = null; renderEditor(); }
+        function changePage(delta) { currentPage += delta; renderTable(); }
+
         function setEdit(type, id) {
             editingId = id; renderEditor();
-            if (type === 'teachers') { const t = allData.teachers.find(x=>x.id===id); document.getElementById('t_name').value = t.name; document.getElementById('t_title').value = t.title; document.getElementById('t_is_dir').value = t.is_director.toString(); }
-            else if (type === 'courses') { const c = allData.courses.find(x=>x.id===id); document.getElementById('c_name').value = c.name; document.getElementById('c_credits').value = c.credits; document.getElementById('c_teacher').value = c.teacher_id; document.getElementById('c_class').value = c.class_group_id; document.getElementById('c_room').value = c.room_type_required; }
-            else if (type === 'classrooms') { const r = allData.classrooms.find(x=>x.id===id); document.getElementById('r_name').value = r.name; document.getElementById('r_type').value = r.room_type; }
-            else if (type === 'classes') { const g = allData.class_groups.find(x=>x.id===id); document.getElementById('g_name').value = g.name; document.getElementById('g_room').value = g.default_classroom_id || ""; }
+            if (type === 'teachers') { 
+                const t = allData.teachers.find(x=>x.id===id); 
+                document.getElementById('t_name').value = t.name; 
+                document.getElementById('t_title').value = t.title; 
+                document.getElementById('t_is_dir').value = t.is_director.toString(); 
+            } else if (type === 'courses') { 
+                const c = allData.courses.find(x=>x.id===id); 
+                document.getElementById('c_name').value = c.name; 
+                document.getElementById('c_credits').value = c.credits; 
+                document.getElementById('c_teacher').value = c.teacher_id; 
+                document.getElementById('c_room').value = c.room_type_required; 
+                document.getElementById('c_allowed').value = c.allowed_slots || ""; 
+                document.getElementById('c_fday').value = c.fixed_day || ""; 
+                document.getElementById('c_fslot').value = c.fixed_slot || "";
+                const cids = c.class_ids || [];
+                document.querySelectorAll('input[name="c_classes"]').forEach(cb => cb.checked = cids.includes(parseInt(cb.value)));
+            } else if (type === 'classrooms') { 
+                const r = allData.classrooms.find(x=>x.id===id); 
+                document.getElementById('r_name').value = r.name; 
+                document.getElementById('r_type').value = r.room_type; 
+            } else if (type === 'classes') { 
+                const g = allData.class_groups.find(x=>x.id===id); 
+                document.getElementById('g_name').value = g.name; 
+                document.getElementById('g_room').value = g.default_classroom_id || ""; 
+            }
         }
 
         async function saveItem(tab) {
             let payload, endpoint;
-            if (tab === 'teachers') { payload = { name: document.getElementById('t_name').value, title: document.getElementById('t_title').value, is_director: document.getElementById('t_is_dir').value === 'true' }; endpoint = 'teachers'; }
-            else if (tab === 'courses') { payload = { name: document.getElementById('c_name').value, credits: parseInt(document.getElementById('c_credits').value), teacher_id: parseInt(document.getElementById('c_teacher').value), class_group_id: parseInt(document.getElementById('c_class').value), room_type_required: document.getElementById('c_room').value }; endpoint = 'courses'; }
-            else if (tab === 'classrooms') { payload = { name: document.getElementById('r_name').value, room_type: document.getElementById('r_type').value }; endpoint = 'classrooms'; }
-            else if (tab === 'classes') { payload = { name: document.getElementById('g_name').value, default_classroom_id: document.getElementById('g_room').value ? parseInt(document.getElementById('g_room').value) : null }; endpoint = 'class_groups'; }
+            if (tab === 'teachers') { 
+                payload = { name: document.getElementById('t_name').value, title: document.getElementById('t_title').value, is_director: document.getElementById('t_is_dir').value === 'true' }; 
+                endpoint = 'teachers'; 
+            } else if (tab === 'courses') { 
+                const classIds = Array.from(document.querySelectorAll('input[name="c_classes"]:checked')).map(cb => parseInt(cb.value));
+                payload = { 
+                    name: document.getElementById('c_name').value, 
+                    credits: parseInt(document.getElementById('c_credits').value), 
+                    teacher_id: parseInt(document.getElementById('c_teacher').value), 
+                    class_ids: classIds, 
+                    room_type_required: document.getElementById('c_room').value, 
+                    allowed_slots: document.getElementById('c_allowed').value,
+                    fixed_day: document.getElementById('c_fday').value ? parseInt(document.getElementById('c_fday').value) : null, 
+                    fixed_slot: document.getElementById('c_fslot').value ? parseInt(document.getElementById('c_fslot').value) : null 
+                }; 
+                endpoint = 'courses'; 
+            }
+ else if (tab === 'classrooms') { 
+                payload = { name: document.getElementById('r_name').value, room_type: document.getElementById('r_type').value }; 
+                endpoint = 'classrooms'; 
+            } else if (tab === 'classes') { 
+                payload = { name: document.getElementById('g_name').value, default_classroom_id: document.getElementById('g_room').value ? parseInt(document.getElementById('g_room').value) : null }; 
+                endpoint = 'class_groups'; 
+            }
             if (!payload.name) return alert("請輸入名稱");
-            const url = `http://localhost:9000/api/${endpoint}` + (editingId ? `/${editingId}` : '');
-            await fetch(url, { method: editingId ? 'PUT' : 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+            await fetch(`http://127.0.0.1:9000/api/${endpoint}` + (editingId ? `/${editingId}` : ''), { method: editingId ? 'PUT' : 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
             await fetchData(); switchTab(tab);
         }
 
-        async function deleteItem(type, id) { if (confirm("確定刪除？")) { const endpoint = type === 'classes' ? 'class_groups' : type; await fetch(`http://localhost:9000/api/${endpoint}/${id}`, { method: 'DELETE' }); await fetchData(); switchTab(type); } }
-        
-        // 初始載入
-        fetchData().then(async () => {
-            // 先嘗試獲取現有課表
-            await fetchSchedule();
-            // 如果沒課表，自動幫使用者跑一次排課
+        async function saveSettings() {
+            const payload = { 
+                thursday_afternoon_off: document.getElementById('r_thurs').value === 'true', 
+                friday_all_day_off: document.getElementById('r_fri').value === 'true', 
+                afternoon_force_start_slot5: false, 
+                ge_zone_day: parseInt(document.getElementById('r_ge_day').value)-1, 
+                ge_zone_slots: document.getElementById('r_ge_slots').value, 
+                labor_slots: document.getElementById('r_labor').value, 
+                director_off_day: parseInt(document.getElementById('r_dir_day').value)-1, 
+                director_off_slots: document.getElementById('r_dir_slots').value, 
+                midweek_limit_enabled: document.getElementById('r_mid_en').value === 'true', 
+                midweek_allowed_slots: document.getElementById('r_mid_slots').value 
+            };
+            await fetch('http://127.0.0.1:9000/api/settings', { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+            alert("規則已更新"); fetchData();
+        }
+
+        async function deleteItem(type, id) { 
+            if (confirm("確定刪除？")) { 
+                await fetch(`http://127.0.0.1:9000/api/${type === 'classes' ? 'class_groups' : type}/${id}`, { method: 'DELETE' }); 
+                await fetchData(); switchTab(type); 
+            } 
+        }
+
+        function renderTeacherSidebar() {
+            const container = document.getElementById('teacherList');
+            if (!container) return;
+            container.innerHTML = allData.teachers.map(t => {
+                const hours = allSchedules.filter(s => s.teacher_name === t.name).length;
+                return `<div class="teacher-item ${currentTeacher === t.name ? 'active' : ''}" onclick="selectTeacher('${t.name}')">
+                    <span>👤 ${t.name}</span>
+                    <span class="teacher-hours">${hours} 節</span>
+                </div>`;
+            }).join('');
+        }
+
+        function selectClass(name) { viewMode = 'class'; currentClass = name; currentTeacher = null; updatePrintTitle(); renderClassSelector(); renderTeacherSidebar(); renderSchedule(); }
+        function selectTeacher(name) { viewMode = 'teacher'; currentTeacher = name; updatePrintTitle(); renderClassSelector(); renderTeacherSidebar(); renderSchedule(); }
+        function setViewMode(mode) { viewMode = mode; currentTeacher = null; updatePrintTitle(); renderClassSelector(); renderTeacherSidebar(); renderSchedule(); }
+
+        function renderClassSelector() {
+            const container = document.getElementById('classSelector');
+            if (viewMode !== 'class') { 
+                container.innerHTML = `<button class="btn-secondary" onclick="setViewMode('class')">🔙 返回班級視角</button>`; 
+                return; 
+            }
+            container.innerHTML = allData.class_groups.map(c => `<button class="btn-secondary ${c.name === currentClass ? 'active' : ''}" style="margin-right:5px; ${c.name === currentClass ? 'background:var(--primary)' : ''}" onclick="selectClass('${c.name}')">${c.name}</button>`).join('');
+        }
+
+        fetchData().then(async () => { 
+            await fetchSchedule(); 
             if (!allSchedules || allSchedules.length === 0) {
-                console.log("自動執行首次排課...");
-                document.getElementById('runBtn').click();
+                document.getElementById('scheduleContainer').innerHTML = `<div style="text-align:center; padding:100px 20px; background:white; border-radius:12px;"><h2>歡迎使用南亞技術學院排課系統</h2><p>設定完成後，點擊「🚀 一鍵自動排課」即可產生課表。</p><button class="btn-primary" onclick="document.getElementById('runBtn').click()">立即開始排課</button></div>`;
             }
         });
     </script>
