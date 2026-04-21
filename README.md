@@ -49,7 +49,22 @@
 *   **資料庫**: 
     *   開發環境：SQLite (檔案位於 `backend/course_schedule.db`).
     *   生產環境：支援 PostgreSQL (可透過 Docker 快速啟動).
-*   **容器化**: **Docker & Docker Compose** (用於標準化開發環境與資料庫部署).
+*   **容器化**: **Docker & Docker Compose** (用於標準化開發環境與資料庫部署)。
+
+---
+
+## 📂 後端目錄架構與檔案說明 (Backend Structure)
+
+*   **`docker-compose.yml` (基礎設施配置)**: 
+    使用 Docker 容器化技術，一鍵建立與設定 PostgreSQL 資料庫服務，確保存儲環境的標準化與持久化。
+*   **`models.py` (資料庫綱要 Data Schema)**: 
+    採用 SQLAlchemy ORM 定義系統的核心實體（如：教師、教室、班級、課程），並透過中介表實現複雜的多對多關聯（如：合班課邏輯）。
+*   **`init_db.py` & `mock_data.py` (資料初始化腳本)**: 
+    提供開發階段快速重置資料庫的工具，包含基礎數據匯入與針對特定情境（如：勞作教育特權）的模擬資料生成。
+*   **`main.py` (API 伺服器入口)**: 
+    基於 FastAPI 框架的後端核心，處理前端的 CRUD 請求、規則更新，並作為前端與排課引擎（Scheduler）之間的通訊橋樑。
+*   **`scheduler.py` (核心排課演算法引擎)**: 
+    專案的最核心部分。利用 Google OR-Tools (CP-SAT 求解器) 將排課規則轉化為數學約束條件，計算出無衝突且滿足多重需求的最佳課表。
 
 ---
 
