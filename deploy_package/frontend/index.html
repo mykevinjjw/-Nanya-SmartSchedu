@@ -102,7 +102,7 @@
 
         async function fetchData() { 
             try { 
-                const res = await fetch('http://123.241.66.93:9000/api/data'); 
+                const res = await fetch('http://127.0.0.1:9000/api/data'); 
                 allData = await res.json(); 
                 if (!currentClass && allData.class_groups.length > 0) {
                     currentClass = allData.class_groups[0].name;
@@ -113,7 +113,7 @@
                 renderSchedule();
             } catch(e) { console.error(e); } 
         }
-        async function fetchSchedule() { try { const res = await fetch('http://123.241.66.93:9000/api/schedule'); allSchedules = await res.json(); renderTeacherSidebar(); renderSchedule(); } catch(e) { console.error(e); } }
+        async function fetchSchedule() { try { const res = await fetch('http://127.0.0.1:9000/api/schedule'); allSchedules = await res.json(); renderTeacherSidebar(); renderSchedule(); } catch(e) { console.error(e); } }
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('collapsed'); }
         
         function updatePrintTitle() {
@@ -159,7 +159,7 @@
             btn.disabled = true; 
             btn.innerText = "⏳ 運算中...";
             try { 
-                const res = await fetch('http://123.241.66.93:9000/api/run-scheduler', { method: 'POST' }); 
+                const res = await fetch('http://127.0.0.1:9000/api/run-scheduler', { method: 'POST' }); 
                 const data = await res.json(); 
                 if (data.error) {
                     alert(data.error); 

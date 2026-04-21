@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # 1. 資料庫服務
+  db:
+    image: postgres:15
+    container_name: course_schedule_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: course_schedule
+    ports:
+      - "15432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  # 2. 後端 API 服務
+  backend:
+    build: ./backend
+    container_name: course_backend
+    ports:
+      - "9000:9000"
+    environment:
+      - DATABASE_URL=postgresql://admin:secretpassword@db:5432/course_schedule
+    depends_on:
+      - db
+    restart: always
+
+  # 3. 前端網頁服務 (使用 Nginx)
+  frontend:
+    image: nginx:alpine
+    container_name: course_frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    restart: always
+
+volumes:
+  postgres_data:

@@ -19,7 +19,7 @@ app = FastAPI(title="大學自動排課系統")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 # 掛載前端靜態檔案
-# 取得目前檔案路徑 (backend/) 的上一層，再進入 frontend
+# 在部署包中，frontend 資料夾與 backend 資料夾是同級的
 current_dir = os.path.dirname(os.path.abspath(__file__))
 frontend_path = os.path.join(os.path.dirname(current_dir), "frontend")
 
