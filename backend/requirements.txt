@@ -4,3 +4,5 @@ sqlalchemy
 psycopg2-binary
 ortools
 pydantic
+aiofiles
+python-multipart

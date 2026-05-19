@@ -23,13 +23,23 @@ services:
       - "9000:9000"
     environment:
       - DATABASE_URL=postgresql://admin:secretpassword@db:5432/course_schedule
-    # --- 加上這三行，掛載前端與資料檔案 ---
     volumes:
-      - ./frontend:/app/frontend
       - ./course_summary.md:/app/course_summary.md
-    # --------------------------------------
     depends_on:
       - db
+    restart: always
+
+  # 3. Nginx 反向代理服務 (新加入)
+  nginx:
+    image: nginx:alpine
+    container_name: course_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - backend
     restart: always
 
 volumes:
