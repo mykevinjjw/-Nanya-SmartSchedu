@@ -344,7 +344,7 @@
 
         async function fetchData() { 
             try { 
-                const res = await fetch('/course-api/data'); 
+                const res = await fetch('/api/data'); 
                 allData = await res.json(); 
                 if (!currentClass && allData.class_groups.length > 0) {
                     currentClass = allData.class_groups[0].name;
@@ -355,7 +355,7 @@
                 renderSchedule();
             } catch(e) { console.error(e); } 
         }
-        async function fetchSchedule() { try { const res = await fetch('/course-api/schedule'); allSchedules = await res.json(); renderTeacherSidebar(); renderSchedule(); } catch(e) { console.error(e); } }
+        async function fetchSchedule() { try { const res = await fetch('/api/schedule'); allSchedules = await res.json(); renderTeacherSidebar(); renderSchedule(); } catch(e) { console.error(e); } }
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('collapsed'); }
         
         function updatePrintTitle() {
@@ -397,7 +397,7 @@
             const btn = document.getElementById('runBtn'); 
             btn.disabled = true; btn.innerText = "⏳ 正在運算中...";
             try { 
-                const res = await fetch('/course-api/run-scheduler', { method: 'POST' }); 
+                const res = await fetch('/api/run-scheduler', { method: 'POST' }); 
                 const data = await res.json(); 
                 if (data.error) alert(data.error); 
                 else { allSchedules = data; renderTeacherSidebar(); renderSchedule(); alert("✅ 排課成功！"); } 
@@ -479,7 +479,7 @@
 
         async function doImportCSV() {
             if (!confirm("匯入將清空現有資料，確定嗎？")) return;
-            const res = await fetch('/course-api/import-csv', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ text: csvRawData }) });
+            const res = await fetch('/api/import-csv', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ text: csvRawData }) });
             const result = await res.json();
             if (result.ok) { alert("✅ 匯入成功！"); fetchData(); switchTab('teachers'); }
         }
@@ -560,7 +560,7 @@
 
         async function saveSettings() {
             const payload = { thursday_afternoon_off: document.getElementById('r_thurs').value === 'true', friday_all_day_off: document.getElementById('r_fri').value === 'true', afternoon_force_start_slot5: false, ge_zone_day: parseInt(document.getElementById('r_ge_day').value)-1, ge_zone_slots: document.getElementById('r_ge_slots').value, labor_slots: '1,8', director_off_day: 1, director_off_slots: document.getElementById('r_dir_slots').value, midweek_limit_enabled: document.getElementById('r_mid_en').value === 'true', midweek_allowed_slots: '2,3,4,5,6,7' };
-            await fetch('/course-api/settings', { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+            await fetch('/api/settings', { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
             alert("規則已更新"); fetchData();
         }
 
