@@ -1,0 +1,726 @@
+{
+  "teachers": {
+    "林金俊": "AA",
+    "藍中賢": "BB",
+    "董炳信": "CC",
+    "李明仁": "DD",
+    "賴勇良": "EE",
+    "簡琨晃": "FF",
+    "蕭文豪": "GG",
+    "陳鐘源": "HH",
+    "林志明": "II",
+    "鄭大立": "JJ"
+  },
+  "classrooms": [
+    "C407",
+    "C501",
+    "C504",
+    "F317",
+    "F409",
+    "無人機實作場",
+    "電算中心",
+    "體育館"
+  ],
+  "class_groups": [
+    "日四技一\n智慧科技應用組",
+    "日四技一\n系統與網路工程組",
+    "日四技三\n智慧科技應用組",
+    "日四技三\n系統與網路工程組",
+    "日四技二\n智慧科技應用組",
+    "日四技二\n系統與網路工程組",
+    "日四技共同",
+    "日四技四",
+    "日四技產專",
+    "表1：資工系日四技開課時數表"
+  ],
+  "courses": [
+    {
+      "name": "科目名稱",
+      "class_name": "表1：資工系日四技開課時數表",
+      "teacher_name": "開課教師",
+      "credits": 2,
+      "room_hint": null,
+      "note": "備註(開課建議教師)"
+    },
+    {
+      "name": "語音辨識",
+      "class_name": "日四技四",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "虛擬實境",
+      "class_name": "日四技四",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "無線隨意與感測網路設計",
+      "class_name": "日四技四",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "網路遊戲設計",
+      "class_name": "日四技四",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "影像處理",
+      "class_name": "日四技四",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "網路安全與管理",
+      "class_name": "日四技四",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "馬達控制實務",
+      "class_name": "日四技四",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "資通安全管理系統導入實務",
+      "class_name": "日四技四",
+      "teacher_name": "林金俊",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "資通安全管理法規實務",
+      "class_name": "日四技四",
+      "teacher_name": "",
+      "credits": 1,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "資料導向程式設計",
+      "class_name": "日四技四",
+      "teacher_name": "蕭文豪",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦，巨量資料分析師能力鑑定證照課程"
+    },
+    {
+      "name": "機器學習資料解析與建模",
+      "class_name": "日四技四",
+      "teacher_name": "董炳信",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦，經濟部機器學習工程師認證(初級)課程"
+    },
+    {
+      "name": "校外實習",
+      "class_name": "日四技四",
+      "teacher_name": "班導師",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "校外實習",
+      "class_name": "日四技四",
+      "teacher_name": "班導師",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "校外實習",
+      "class_name": "日四技四",
+      "teacher_name": "班導師",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "實務專題",
+      "class_name": "日四技三\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "微處理機",
+      "class_name": "日四技三\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "資訊安全管理概論",
+      "class_name": "日四技三\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": "經濟部iPAS資訊安全工程師初級能力鑑定先修課程"
+    },
+    {
+      "name": "電腦硬體裝修實務",
+      "class_name": "日四技三\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "勞動部電腦硬體裝修證照課程/使用電腦"
+    },
+    {
+      "name": "互動設計",
+      "class_name": "日四技三\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "網路安全管理",
+      "class_name": "日四技三\n系統與網路工程組",
+      "teacher_name": "林志明",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "智慧機器人實務",
+      "class_name": "日四技三\n系統與網路工程組",
+      "teacher_name": "李明仁",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "實務專題",
+      "class_name": "日四技三\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "感測控制與應用",
+      "class_name": "日四技三\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "無人機空拍應用實務",
+      "class_name": "日四技三\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "資料導向程式設計",
+      "class_name": "日四技三\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "經濟部iPas巨量資料分析師初級鑑定先修課程/使用電腦"
+    },
+    {
+      "name": "電腦視覺",
+      "class_name": "日四技三\n智慧科技應用組",
+      "teacher_name": "董炳信",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "網路安全管理",
+      "class_name": "日四技三\n智慧科技應用組",
+      "teacher_name": "共開",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "智慧機器人實務",
+      "class_name": "日四技三\n智慧科技應用組",
+      "teacher_name": "共開",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "人工智慧概論",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "共同",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "通識課程",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "通識",
+      "credits": 4,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "數位邏輯",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "賴勇良",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "Python程式設計",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "李明仁",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "軟體工程導論",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "組合語言",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "網際網路服務與安全",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "賴勇良",
+      "credits": 3,
+      "room_hint": null,
+      "note": "ITE網路通訊專業人員證照考照課程"
+    },
+    {
+      "name": "數位訊號處理",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "電競產業概論",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "網站建置實務",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "Linux作業系統",
+      "class_name": "日四技二\n系統與網路工程組",
+      "teacher_name": "簡琨晃",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "人工智慧概論",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "共同",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "通識課程",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "通識",
+      "credits": 4,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "Python程式設計",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "資料庫系統實務",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "無人機操控實務",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "遙控無人機普通操作證證照課程"
+    },
+    {
+      "name": "物聯網基礎架構概論",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": "經濟部iPas初級物聯網應用工程師能力鑑定先修課程"
+    },
+    {
+      "name": "R程式語言",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "無人機專業基本級證照課程"
+    },
+    {
+      "name": "人工智慧與專家系統",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "機器人概論",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "網站建置實務",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "AWS雲端基礎與服務管理",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "簡琨晃",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "Linux作業系統",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "Python程式設計",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "李明仁",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "校外實習",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "林金俊、蕭文豪",
+      "credits": 6,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "無人機操控實務",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "R程式語言",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "人工智慧與專家系統",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "無人機專業基本級證照課程"
+    },
+    {
+      "name": "網站建置實務",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "雲端應用實務",
+      "class_name": "日四技二\n智慧科技應用組",
+      "teacher_name": "簡琨晃",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "英文",
+      "class_name": "日四技一\n系統與網路工程組",
+      "teacher_name": "共同",
+      "credits": 2,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "體育",
+      "class_name": "日四技一\n系統與網路工程組",
+      "teacher_name": "共同",
+      "credits": 2,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "勞作教育",
+      "class_name": "日四技一\n系統與網路工程組",
+      "teacher_name": "賴勇良",
+      "credits": 1,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "電腦應用",
+      "class_name": "日四技一\n系統與網路工程組",
+      "teacher_name": "共同",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "計算機概論",
+      "class_name": "日四技一\n系統與網路工程組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "通訊網路概論",
+      "class_name": "日四技一\n系統與網路工程組",
+      "teacher_name": "賴勇良",
+      "credits": 3,
+      "room_hint": null,
+      "note": "ITE網路通訊專業人員證照先修課程(1/2)、銜接課程/使用電腦"
+    },
+    {
+      "name": "作業系統實務程式語言設計",
+      "class_name": "日四技一\n系統與網路工程組",
+      "teacher_name": "賴勇良",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "微積分資料結構",
+      "class_name": "日四技一\n系統與網路工程組",
+      "teacher_name": "李明仁",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "英文",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "共同",
+      "credits": 2,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "體育",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "共同",
+      "credits": 2,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "勞作教育",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "賴勇良",
+      "credits": 1,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "電腦應用",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "共同",
+      "credits": 2,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "計算機概論",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "通訊網路概論",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "ITE網路通訊專業人員證照先修課程、銜接課程/使用電腦"
+    },
+    {
+      "name": "作業系統實務程式語言設計",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "雲端運算資料結構",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "華語聽說練習",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "共同",
+      "credits": 2,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "華語輔導",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "共同",
+      "credits": 0,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "體育",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "共同",
+      "credits": 2,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "勞作教育",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "藍中賢",
+      "credits": 1,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "計算機概論",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "蕭文豪",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "通訊網路概論",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "無人機概論",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "林金俊、陳鐘源",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "資料科學概論",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "藍中賢",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "管理資訊系統",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": ""
+    },
+    {
+      "name": "程式語言設計",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "",
+      "credits": 3,
+      "room_hint": null,
+      "note": "使用電腦"
+    },
+    {
+      "name": "科目名稱",
+      "class_name": "日四技一\n智慧科技應用組",
+      "teacher_name": "開課教師",
+      "credits": 2,
+      "room_hint": null,
+      "note": "教務處排課時段"
+    }
+  ]
+}

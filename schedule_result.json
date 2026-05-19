@@ -1,0 +1,479 @@
+[
+  {
+    "course_name": "資通安全管理系統導入實務",
+    "class_name": "日四技四",
+    "teacher_name": "林金俊",
+    "room_name": "F409",
+    "day": 0,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "資料導向程式設計",
+    "class_name": "日四技四",
+    "teacher_name": "蕭文豪",
+    "room_name": "F301",
+    "day": 1,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "機器學習資料解析與建模",
+    "class_name": "日四技四",
+    "teacher_name": "董炳信",
+    "room_name": "F409",
+    "day": 2,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "網路安全管理",
+    "class_name": "日四技三 系統與網路工程組",
+    "teacher_name": "林志明",
+    "room_name": "F302",
+    "day": 2,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "智慧機器人實務",
+    "class_name": "日四技三 系統與網路工程組",
+    "teacher_name": "李明仁",
+    "room_name": "C407",
+    "day": 1,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "資通系統專案管理",
+    "class_name": "日四技三 智慧科技應用組",
+    "teacher_name": "(同系工組)",
+    "room_name": "C405",
+    "day": 1,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "實務專題(一)",
+    "class_name": "日四技三 智慧科技應用組",
+    "teacher_name": "(同系工組)",
+    "room_name": "F407",
+    "day": 2,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "電腦視覺",
+    "class_name": "日四技三 智慧科技應用組",
+    "teacher_name": "董炳信",
+    "room_name": "C501",
+    "day": 1,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "網路安全管理",
+    "class_name": "日四技三 智慧科技應用組",
+    "teacher_name": "共開",
+    "room_name": "C405",
+    "day": 2,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "智慧機器人實務",
+    "class_name": "日四技三 智慧科技應用組",
+    "teacher_name": "共開",
+    "room_name": "C405",
+    "day": 0,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "英文(三)",
+    "class_name": "日四技二 系統與網路工程組",
+    "teacher_name": "共同",
+    "room_name": "C502",
+    "day": 0,
+    "slot": 3,
+    "duration": 2
+  },
+  {
+    "course_name": "英文(三)",
+    "class_name": "日四技二 智慧科技應用組",
+    "teacher_name": "共同",
+    "room_name": "C502",
+    "day": 0,
+    "slot": 3,
+    "duration": 2
+  },
+  {
+    "course_name": "人工智慧概論",
+    "class_name": "日四技二 系統與網路工程組",
+    "teacher_name": "共同",
+    "room_name": "F407",
+    "day": 0,
+    "slot": 1,
+    "duration": 2
+  },
+  {
+    "course_name": "人工智慧概論",
+    "class_name": "日四技二 智慧科技應用組",
+    "teacher_name": "共同",
+    "room_name": "F407",
+    "day": 0,
+    "slot": 1,
+    "duration": 2
+  },
+  {
+    "course_name": "通識課程",
+    "class_name": "日四技二 系統與網路工程組",
+    "teacher_name": "通識",
+    "room_name": "C407",
+    "day": 0,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "通識課程",
+    "class_name": "日四技二 智慧科技應用組",
+    "teacher_name": "通識",
+    "room_name": "C407",
+    "day": 0,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "數位邏輯",
+    "class_name": "日四技二 系統與網路工程組",
+    "teacher_name": "賴勇良",
+    "room_name": "F301",
+    "day": 2,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "Python程式設計",
+    "class_name": "日四技二 系統與網路工程組",
+    "teacher_name": "李明仁",
+    "room_name": "C407",
+    "day": 2,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "Python程式設計",
+    "class_name": "日四技二 智慧科技應用組(國際產專班)",
+    "teacher_name": "李明仁",
+    "room_name": "C407",
+    "day": 2,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "網際網路服務與安全",
+    "class_name": "日四技二 系統與網路工程組",
+    "teacher_name": "賴勇良",
+    "room_name": "F317",
+    "day": 1,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "Linux作業系統",
+    "class_name": "日四技二 系統與網路工程組",
+    "teacher_name": "簡琨晃",
+    "room_name": "F301",
+    "day": 1,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "Python程式設計",
+    "class_name": "日四技二 智慧科技應用組",
+    "teacher_name": "(同系工組)",
+    "room_name": "C501",
+    "day": 1,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "AWS 雲端基礎與服務管理",
+    "class_name": "日四技二 智慧科技應用組",
+    "teacher_name": "簡琨晃",
+    "room_name": "F317",
+    "day": 2,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "華語證照輔導(二)",
+    "class_name": "日四技二 智慧科技應用組(國際產專班)",
+    "teacher_name": "共同",
+    "room_name": "F302",
+    "day": 0,
+    "slot": 1,
+    "duration": 2
+  },
+  {
+    "course_name": "雲端應用實務",
+    "class_name": "日四技二 智慧科技應用組(國際產專班)",
+    "teacher_name": "簡琨晃",
+    "room_name": "F302",
+    "day": 1,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "中文閱讀與寫作(一)",
+    "class_name": "日四技一 系統與網路工程組",
+    "teacher_name": "共同",
+    "room_name": "C502",
+    "day": 0,
+    "slot": 5,
+    "duration": 2
+  },
+  {
+    "course_name": "中文閱讀與寫作(一)",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "共同",
+    "room_name": "C502",
+    "day": 0,
+    "slot": 5,
+    "duration": 2
+  },
+  {
+    "course_name": "英文(一)",
+    "class_name": "日四技一 系統與網路工程組",
+    "teacher_name": "共同",
+    "room_name": "C405",
+    "day": 1,
+    "slot": 3,
+    "duration": 2
+  },
+  {
+    "course_name": "英文(一)",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "共同",
+    "room_name": "C405",
+    "day": 1,
+    "slot": 3,
+    "duration": 2
+  },
+  {
+    "course_name": "體育",
+    "class_name": "日四技一 系統與網路工程組",
+    "teacher_name": "共同",
+    "room_name": "體育館",
+    "day": 1,
+    "slot": 1,
+    "duration": 2
+  },
+  {
+    "course_name": "體育",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "共同",
+    "room_name": "體育館",
+    "day": 1,
+    "slot": 1,
+    "duration": 2
+  },
+  {
+    "course_name": "體育",
+    "class_name": "日四技一 智慧科技應用組(國際產專班)",
+    "teacher_name": "共同",
+    "room_name": "體育館",
+    "day": 1,
+    "slot": 1,
+    "duration": 2
+  },
+  {
+    "course_name": "勞作教育",
+    "class_name": "日四技一 系統與網路工程組",
+    "teacher_name": "賴勇良",
+    "room_name": "C501",
+    "day": 0,
+    "slot": 1,
+    "duration": 1
+  },
+  {
+    "course_name": "勞作教育",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "賴勇良",
+    "room_name": "C501",
+    "day": 0,
+    "slot": 1,
+    "duration": 1
+  },
+  {
+    "course_name": "電腦應用(一)",
+    "class_name": "日四技一 系統與網路工程組",
+    "teacher_name": "共同",
+    "room_name": "F407",
+    "day": 1,
+    "slot": 5,
+    "duration": 2
+  },
+  {
+    "course_name": "電腦應用(一)",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "共同",
+    "room_name": "F407",
+    "day": 1,
+    "slot": 5,
+    "duration": 2
+  },
+  {
+    "course_name": "通訊網路概論",
+    "class_name": "日四技一 系統與網路工程組",
+    "teacher_name": "賴勇良",
+    "room_name": "F301",
+    "day": 2,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "作業系統實務",
+    "class_name": "日四技一 系統與網路工程組",
+    "teacher_name": "賴勇良",
+    "room_name": "C501",
+    "day": 0,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "程式語言設計",
+    "class_name": "日四技一 系統與網路工程組",
+    "teacher_name": "賴勇良",
+    "room_name": "F317",
+    "day": 0,
+    "slot": 7,
+    "duration": 3
+  },
+  {
+    "course_name": "微積分",
+    "class_name": "日四技一 系統與網路工程組",
+    "teacher_name": "李明仁",
+    "room_name": "C502",
+    "day": 3,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "資料結構",
+    "class_name": "日四技一 系統與網路工程組",
+    "teacher_name": "李明仁",
+    "room_name": "C502",
+    "day": 2,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "計算機概論",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "(同系工組)",
+    "room_name": "F407",
+    "day": 1,
+    "slot": 7,
+    "duration": 3
+  },
+  {
+    "course_name": "通訊網路概論",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "(同系工組)",
+    "room_name": "F407",
+    "day": 0,
+    "slot": 7,
+    "duration": 3
+  },
+  {
+    "course_name": "作業系統實務",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "(同系工組)",
+    "room_name": "C407",
+    "day": 3,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "程式語言設計",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "(同系工組)",
+    "room_name": "C407",
+    "day": 0,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "雲端運算",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "(李明仁)",
+    "room_name": "C501",
+    "day": 2,
+    "slot": 2,
+    "duration": 3
+  },
+  {
+    "course_name": "資料結構",
+    "class_name": "日四技一 智慧科技應用組",
+    "teacher_name": "(李明仁)",
+    "room_name": "C405",
+    "day": 2,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "華語(一)",
+    "class_name": "日四技一 智慧科技應用組(國際產專班)",
+    "teacher_name": "共同",
+    "room_name": "C502",
+    "day": 1,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "華語聽說練習(一)",
+    "class_name": "日四技一 智慧科技應用組(國際產專班)",
+    "teacher_name": "共同",
+    "room_name": "F317",
+    "day": 0,
+    "slot": 3,
+    "duration": 2
+  },
+  {
+    "course_name": "勞作教育",
+    "class_name": "日四技一 智慧科技應用組(國際產專班)",
+    "teacher_name": "藍中賢",
+    "room_name": "C405",
+    "day": 0,
+    "slot": 1,
+    "duration": 1
+  },
+  {
+    "course_name": "計算機概論",
+    "class_name": "日四技一 智慧科技應用組(國際產專班)",
+    "teacher_name": "蕭文豪",
+    "room_name": "F301",
+    "day": 0,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "無人機概論",
+    "class_name": "日四技一 智慧科技應用組(國際產專班)",
+    "teacher_name": "林金俊(1)、陳鐘源(2)",
+    "room_name": "無人機實作場",
+    "day": 2,
+    "slot": 5,
+    "duration": 3
+  },
+  {
+    "course_name": "資料科學概論",
+    "class_name": "日四技一 智慧科技應用組(國際產專班)",
+    "teacher_name": "藍中賢",
+    "room_name": "F301",
+    "day": 4,
+    "slot": 5,
+    "duration": 3
+  }
+]

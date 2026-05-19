@@ -1,0 +1,1028 @@
+{
+  "teachers": [
+    {
+      "id": 1,
+      "name": "---",
+      "is_director": false
+    },
+    {
+      "id": 2,
+      "name": "(保留課程)",
+      "is_director": false
+    },
+    {
+      "id": 3,
+      "name": "林金俊",
+      "is_director": true
+    },
+    {
+      "id": 4,
+      "name": "蕭文豪",
+      "is_director": false
+    },
+    {
+      "id": 5,
+      "name": "董炳信",
+      "is_director": false
+    },
+    {
+      "id": 6,
+      "name": "班導師",
+      "is_director": false
+    },
+    {
+      "id": 7,
+      "name": "林志明",
+      "is_director": false
+    },
+    {
+      "id": 8,
+      "name": "李明仁",
+      "is_director": false
+    },
+    {
+      "id": 9,
+      "name": "(同系工組)",
+      "is_director": false
+    },
+    {
+      "id": 10,
+      "name": "共開",
+      "is_director": false
+    },
+    {
+      "id": 11,
+      "name": "共同",
+      "is_director": false
+    },
+    {
+      "id": 12,
+      "name": "通識",
+      "is_director": false
+    },
+    {
+      "id": 13,
+      "name": "賴勇良",
+      "is_director": false
+    },
+    {
+      "id": 14,
+      "name": "簡琨晃",
+      "is_director": false
+    },
+    {
+      "id": 15,
+      "name": "(李明仁)",
+      "is_director": false
+    },
+    {
+      "id": 16,
+      "name": "藍中賢",
+      "is_director": true
+    },
+    {
+      "id": 17,
+      "name": "林金俊(1)、陳鐘源(2)",
+      "is_director": false
+    }
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "name": "---"
+    },
+    {
+      "id": 2,
+      "name": "日四技四"
+    },
+    {
+      "id": 3,
+      "name": "日四技三 系統與網路工程組"
+    },
+    {
+      "id": 4,
+      "name": "日四技三 智慧科技應用組"
+    },
+    {
+      "id": 5,
+      "name": "日四技二 系統與網路工程組"
+    },
+    {
+      "id": 6,
+      "name": "日四技二 智慧科技應用組"
+    },
+    {
+      "id": 7,
+      "name": "日四技二 智慧科技應用組(國際產專班)"
+    },
+    {
+      "id": 8,
+      "name": "日四技一 系統與網路工程組"
+    },
+    {
+      "id": 9,
+      "name": "日四技一 智慧科技應用組"
+    },
+    {
+      "id": 10,
+      "name": "日四技一 智慧科技應用組(國際產專班)"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "---",
+      "teacher": "---",
+      "credits": 3,
+      "classes": [
+        "---"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 2,
+      "name": "電腦視覺",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 3,
+      "name": "語音辨識",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 4,
+      "name": "虛擬實境",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 5,
+      "name": "無線隨意與感測網路設計",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 6,
+      "name": "網路遊戲設計",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 7,
+      "name": "影像處理",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 8,
+      "name": "網路安全與管理",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 9,
+      "name": "馬達控制實務",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 10,
+      "name": "資通安全管理系統導入實務",
+      "teacher": "林金俊",
+      "credits": 3,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 11,
+      "name": "資通安全管理法規實務",
+      "teacher": "(保留課程)",
+      "credits": 1,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 12,
+      "name": "資料導向程式設計",
+      "teacher": "蕭文豪",
+      "credits": 3,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 13,
+      "name": "機器學習資料解析與建模",
+      "teacher": "董炳信",
+      "credits": 3,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 14,
+      "name": "校外實習(一)",
+      "teacher": "班導師",
+      "credits": 3,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 15,
+      "name": "校外實習(二)",
+      "teacher": "班導師",
+      "credits": 3,
+      "classes": [
+        "日四技四"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 16,
+      "name": "資通系統專案管理",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技三 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 17,
+      "name": "實務專題(一)",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技三 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 18,
+      "name": "微處理機",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技三 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 19,
+      "name": "資訊安全管理概論",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技三 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 20,
+      "name": "電腦硬體裝修實務",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技三 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 21,
+      "name": "互動設計",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技三 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 22,
+      "name": "網路安全管理",
+      "teacher": "林志明",
+      "credits": 3,
+      "classes": [
+        "日四技三 系統與網路工程組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 23,
+      "name": "智慧機器人實務",
+      "teacher": "李明仁",
+      "credits": 3,
+      "classes": [
+        "日四技三 系統與網路工程組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 24,
+      "name": "資通系統專案管理",
+      "teacher": "(同系工組)",
+      "credits": 3,
+      "classes": [
+        "日四技三 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 25,
+      "name": "實務專題(一)",
+      "teacher": "(同系工組)",
+      "credits": 3,
+      "classes": [
+        "日四技三 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 26,
+      "name": "感測控制與應用",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技三 智慧科技應用組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 27,
+      "name": "無人機空拍應用實務",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技三 智慧科技應用組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 28,
+      "name": "資料導向程式設計",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技三 智慧科技應用組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 29,
+      "name": "電腦視覺",
+      "teacher": "董炳信",
+      "credits": 3,
+      "classes": [
+        "日四技三 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 30,
+      "name": "網路安全管理",
+      "teacher": "共開",
+      "credits": 3,
+      "classes": [
+        "日四技三 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 31,
+      "name": "智慧機器人實務",
+      "teacher": "共開",
+      "credits": 3,
+      "classes": [
+        "日四技三 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 32,
+      "name": "英文(三)",
+      "teacher": "共同",
+      "credits": 2,
+      "classes": [
+        "日四技二 系統與網路工程組",
+        "日四技二 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 33,
+      "name": "人工智慧概論",
+      "teacher": "共同",
+      "credits": 2,
+      "classes": [
+        "日四技二 系統與網路工程組",
+        "日四技二 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 34,
+      "name": "通識課程",
+      "teacher": "通識",
+      "credits": 4,
+      "classes": [
+        "日四技二 系統與網路工程組",
+        "日四技二 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 35,
+      "name": "數位邏輯",
+      "teacher": "賴勇良",
+      "credits": 3,
+      "classes": [
+        "日四技二 系統與網路工程組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 36,
+      "name": "Python程式設計",
+      "teacher": "李明仁",
+      "credits": 3,
+      "classes": [
+        "日四技二 系統與網路工程組",
+        "日四技二 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 37,
+      "name": "軟體工程導論",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技二 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 38,
+      "name": "組合語言",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技二 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 39,
+      "name": "網際網路服務與安全",
+      "teacher": "賴勇良",
+      "credits": 3,
+      "classes": [
+        "日四技二 系統與網路工程組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 40,
+      "name": "數位訊號處理",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技二 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 41,
+      "name": "電競產業概論",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技二 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 42,
+      "name": "網站建置實務",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技二 系統與網路工程組",
+        "日四技二 智慧科技應用組",
+        "日四技二 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 43,
+      "name": "Linux作業系統",
+      "teacher": "簡琨晃",
+      "credits": 3,
+      "classes": [
+        "日四技二 系統與網路工程組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 44,
+      "name": "Python程式設計",
+      "teacher": "(同系工組)",
+      "credits": 3,
+      "classes": [
+        "日四技二 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 45,
+      "name": "資料庫系統實務",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技二 智慧科技應用組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 46,
+      "name": "無人機操控實務",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技二 智慧科技應用組",
+        "日四技二 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 47,
+      "name": "物聯網基礎架構概論",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技二 智慧科技應用組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 48,
+      "name": "R程式語言",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技二 智慧科技應用組",
+        "日四技二 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 49,
+      "name": "人工智慧與專家系統",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技二 智慧科技應用組",
+        "日四技二 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 50,
+      "name": "機器人概論",
+      "teacher": "(保留課程)",
+      "credits": 2,
+      "classes": [
+        "日四技二 智慧科技應用組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 51,
+      "name": "AWS 雲端基礎與服務管理",
+      "teacher": "簡琨晃",
+      "credits": 3,
+      "classes": [
+        "日四技二 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 52,
+      "name": "華語證照輔導(二)",
+      "teacher": "共同",
+      "credits": 2,
+      "classes": [
+        "日四技二 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 53,
+      "name": "雲端應用實務",
+      "teacher": "簡琨晃",
+      "credits": 3,
+      "classes": [
+        "日四技二 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 54,
+      "name": "中文閱讀與寫作(一)",
+      "teacher": "共同",
+      "credits": 2,
+      "classes": [
+        "日四技一 系統與網路工程組",
+        "日四技一 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": "0-3"
+    },
+    {
+      "id": 55,
+      "name": "英文(一)",
+      "teacher": "共同",
+      "credits": 2,
+      "classes": [
+        "日四技一 系統與網路工程組",
+        "日四技一 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": "1-3"
+    },
+    {
+      "id": 56,
+      "name": "體育",
+      "teacher": "共同",
+      "credits": 2,
+      "classes": [
+        "日四技一 系統與網路工程組",
+        "日四技一 智慧科技應用組",
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": "2-7"
+    },
+    {
+      "id": 57,
+      "name": "勞作教育",
+      "teacher": "賴勇良",
+      "credits": 1,
+      "classes": [
+        "日四技一 系統與網路工程組",
+        "日四技一 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 58,
+      "name": "電腦應用(一)",
+      "teacher": "共同",
+      "credits": 2,
+      "classes": [
+        "日四技一 系統與網路工程組",
+        "日四技一 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 59,
+      "name": "計算機概論",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技一 系統與網路工程組"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 60,
+      "name": "通訊網路概論",
+      "teacher": "賴勇良",
+      "credits": 3,
+      "classes": [
+        "日四技一 系統與網路工程組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 61,
+      "name": "作業系統實務",
+      "teacher": "賴勇良",
+      "credits": 3,
+      "classes": [
+        "日四技一 系統與網路工程組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 62,
+      "name": "程式語言設計",
+      "teacher": "賴勇良",
+      "credits": 3,
+      "classes": [
+        "日四技一 系統與網路工程組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 63,
+      "name": "微積分",
+      "teacher": "李明仁",
+      "credits": 3,
+      "classes": [
+        "日四技一 系統與網路工程組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 64,
+      "name": "資料結構",
+      "teacher": "李明仁",
+      "credits": 3,
+      "classes": [
+        "日四技一 系統與網路工程組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 65,
+      "name": "計算機概論",
+      "teacher": "(同系工組)",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 66,
+      "name": "通訊網路概論",
+      "teacher": "(同系工組)",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 67,
+      "name": "作業系統實務",
+      "teacher": "(同系工組)",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 68,
+      "name": "程式語言設計",
+      "teacher": "(同系工組)",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 69,
+      "name": "雲端運算",
+      "teacher": "(李明仁)",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 70,
+      "name": "資料結構",
+      "teacher": "(李明仁)",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 71,
+      "name": "華語(一)",
+      "teacher": "共同",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 72,
+      "name": "華語聽說練習(一)",
+      "teacher": "共同",
+      "credits": 2,
+      "classes": [
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 73,
+      "name": "華語輔導",
+      "teacher": "共同",
+      "credits": 0,
+      "classes": [
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 74,
+      "name": "勞作教育",
+      "teacher": "藍中賢",
+      "credits": 1,
+      "classes": [
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 75,
+      "name": "計算機概論",
+      "teacher": "蕭文豪",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 76,
+      "name": "通訊網路概論",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 77,
+      "name": "無人機概論",
+      "teacher": "林金俊(1)、陳鐘源(2)",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 78,
+      "name": "資料科學概論",
+      "teacher": "藍中賢",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": true,
+      "fixed": null
+    },
+    {
+      "id": 79,
+      "name": "管理資訊系統",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    },
+    {
+      "id": 80,
+      "name": "程式語言設計",
+      "teacher": "(保留課程)",
+      "credits": 3,
+      "classes": [
+        "日四技一 智慧科技應用組(國際產專班)"
+      ],
+      "should_schedule": false,
+      "fixed": null
+    }
+  ]
+}

@@ -11,5 +11,19 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  web:
+    build: .
+    container_name: course_schedule_web
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://admin:secretpassword@db:5432/course_schedule
+    volumes:
+      - .:/app
+      - ../frontend:/app/frontend
+      - ../course_summary.md:/course_summary.md
+    depends_on:
+      - db
+
 volumes:
   postgres_data:

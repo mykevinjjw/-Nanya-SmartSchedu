@@ -27,15 +27,5 @@ services:
       - db
     restart: always
 
-  # 3. 前端網頁服務 (使用 Nginx)
-  frontend:
-    image: nginx:alpine
-    container_name: course_frontend
-    ports:
-      - "80:80"
-    volumes:
-      - ./frontend:/usr/share/nginx/html
-    restart: always
-
 volumes:
   postgres_data:
