@@ -25,7 +25,7 @@ services:
       - DATABASE_URL=postgresql://admin:secretpassword@db:5432/course_schedule
     # --- 加上這兩行，這會把主機上的 frontend 資料夾掛載進容器 ---
     volumes:
-      - ./frontend:/frontend
+      - ./frontend:/app/frontend
     # ------------------------------------------------------
     depends_on:
       - db

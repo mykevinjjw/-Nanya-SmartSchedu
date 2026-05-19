@@ -19,15 +19,28 @@ app = FastAPI(title="大學自動排課系統")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 # 掛載前端靜態檔案
-# 容器內路徑為 /app/frontend
-frontend_path = "/app/frontend"
+# 優先尋找容器掛載路徑，若無則尋找本地開發路徑
+frontend_paths = [
+    "/app/frontend",
+    "/frontend",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "frontend"),
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "frontend")
+]
 
 @app.get("/")
 def read_root():
-    index_file = os.path.join(frontend_path, "index.html")
-    if os.path.exists(index_file):
-        return FileResponse(index_file)
-    return {"error": f"index.html not found at {index_file}. Current workdir: {os.getcwd()}"}
+    for path in frontend_paths:
+        index_file = os.path.join(path, "index.html")
+        if os.path.exists(index_file):
+            return FileResponse(index_file)
+    
+    # 找不到時回傳詳細錯誤資訊協助除錯
+    tried_paths = [os.path.join(p, "index.html") for p in frontend_paths]
+    return {
+        "error": "找不到 index.html",
+        "tried_paths": tried_paths,
+        "current_workdir": os.getcwd()
+    }
 
 # 暫存最後一次排課結果
 last_schedule_result = None
