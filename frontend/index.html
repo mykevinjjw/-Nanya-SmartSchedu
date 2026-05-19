@@ -355,7 +355,23 @@
                 renderSchedule();
             } catch(e) { console.error(e); } 
         }
-        async function fetchSchedule() { try { const res = await fetch('api/schedule'); allSchedules = await res.json(); renderTeacherSidebar(); renderSchedule(); } catch(e) { console.error(e); } }
+        async function fetchSchedule() { 
+            try { 
+                const res = await fetch('api/schedule'); 
+                const data = await res.json();
+                allSchedules = data.result || [];
+                const btn = document.getElementById('runBtn');
+                if (data.is_scheduling) {
+                    btn.disabled = true;
+                    btn.innerText = "⏳ 運算中...";
+                } else {
+                    btn.disabled = false;
+                    btn.innerText = "🚀 一鍵自動排課";
+                }
+                renderTeacherSidebar(); 
+                renderSchedule(); 
+            } catch(e) { console.error(e); } 
+        }
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('collapsed'); }
         
         function updatePrintTitle() {
@@ -395,14 +411,37 @@
 
         document.getElementById('runBtn').onclick = async () => {
             const btn = document.getElementById('runBtn'); 
-            btn.disabled = true; btn.innerText = "⏳ 正在運算中...";
+            btn.disabled = true; btn.innerText = "⏳ 啟動中...";
             try { 
                 const res = await fetch('api/run-scheduler', { method: 'POST' }); 
                 const data = await res.json(); 
-                if (data.error) alert(data.error); 
-                else { allSchedules = data; renderTeacherSidebar(); renderSchedule(); alert("✅ 排課成功！"); } 
-            } catch (e) { alert("❌ 連線失敗：後端未啟動。"); } 
-            finally { btn.disabled = false; btn.innerText = "🚀 一鍵自動排課"; }
+                if (data.ok) {
+                    alert(data.message);
+                    const timer = setInterval(async () => {
+                        try {
+                            const sRes = await fetch('api/schedule');
+                            const sData = await sRes.json();
+                            if (!sData.is_scheduling) {
+                                clearInterval(timer);
+                                allSchedules = sData.result || [];
+                                renderTeacherSidebar();
+                                renderSchedule();
+                                btn.disabled = false;
+                                btn.innerText = "🚀 一鍵自動排課";
+                                alert("✅ 排課完成！");
+                            }
+                        } catch(err) { console.error("輪詢發生錯誤", err); }
+                    }, 5000);
+                } else {
+                    alert("❌ " + data.message);
+                    btn.disabled = false;
+                    btn.innerText = "🚀 一鍵自動排課";
+                }
+            } catch (e) { 
+                alert("❌ 連線失敗或逾時：後端可能正在高負載運作中，請稍候重試或重新整理頁面。"); 
+                btn.disabled = false; 
+                btn.innerText = "🚀 一鍵自動排課";
+            } 
         };
 
         function switchTab(tab) { 

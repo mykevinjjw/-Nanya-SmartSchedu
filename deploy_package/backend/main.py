@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Depends
+from fastapi import BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -42,8 +43,9 @@ def read_root():
         "current_workdir": os.getcwd()
     }
 
-# 暫存最後一次排課結果
+# 暫存最後一次排課結果與狀態
 last_schedule_result = None
+is_scheduling = False
 
 def get_db():
     db = SessionLocal()
@@ -358,18 +360,37 @@ def delete_course(id: int, db: Session = Depends(get_db)):
     db.commit(); return {"ok": True}
 
 @app.post("/api/run-scheduler")
-def run_scheduler_api():
-    global last_schedule_result
-    scheduler = CourseScheduler()
-    result = scheduler.solve()
-    if result is None: return {"error": "無法在現有限制下找到可行解"}
-    last_schedule_result = result
-    scheduler.db.close()
-    return result
+async def run_scheduler_api(background_tasks: BackgroundTasks):
+    global last_schedule_result, is_scheduling
+
+    if is_scheduling:
+        return {"ok": False, "message": "排課任務正在執行中，請稍後。"}
+
+    is_scheduling = True
+
+    def task():
+        global last_schedule_result, is_scheduling
+        try:
+            scheduler = CourseScheduler()
+            result = scheduler.solve()
+            if result:
+                last_schedule_result = result
+                print("✅ 背景排課任務完成！")
+            scheduler.db.close()
+        except Exception as e:
+            print(f"❌ 背景排課發生錯誤: {e}")
+        finally:
+            is_scheduling = False
+
+    background_tasks.add_task(task)
+    return {"ok": True, "message": "排課任務已在背景啟動，預計 1-3 分鐘內完成。"}
 
 @app.get("/api/schedule")
 def get_current_schedule(): 
-    return last_schedule_result if last_schedule_result else []
+    return {
+        "is_scheduling": is_scheduling,
+        "result": last_schedule_result if last_schedule_result else []
+    }
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=9000)

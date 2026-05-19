@@ -253,8 +253,8 @@ class CourseScheduler:
 
         # 5. 求解
         solver = cp_model.CpSolver()
-        solver.parameters.max_time_in_seconds = 300.0
-        solver.parameters.num_search_workers = 16
+        solver.parameters.max_time_in_seconds = 180.0
+        solver.parameters.num_search_workers = 4
         solver.parameters.log_search_progress = True
         status = solver.Solve(model)
 
