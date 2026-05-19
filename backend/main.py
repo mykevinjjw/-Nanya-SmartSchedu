@@ -358,14 +358,23 @@ def delete_course(id: int, db: Session = Depends(get_db)):
     db.commit(); return {"ok": True}
 
 @app.post("/api/run-scheduler")
-def run_scheduler_api():
+async def run_scheduler_api(background_tasks: BackgroundTasks):
     global last_schedule_result
-    scheduler = CourseScheduler()
-    result = scheduler.solve()
-    if result is None: return {"error": "無法在現有限制下找到可行解"}
-    last_schedule_result = result
-    scheduler.db.close()
-    return result
+    
+    def task():
+        global last_schedule_result
+        try:
+            scheduler = CourseScheduler()
+            result = scheduler.solve()
+            if result:
+                last_schedule_result = result
+                print("✅ 背景排課任務完成！")
+            scheduler.db.close()
+        except Exception as e:
+            print(f"❌ 背景排課發生錯誤: {e}")
+
+    background_tasks.add_task(task)
+    return {"message": "排課任務已在背景啟動，請於 1-2 分鐘後重新整理頁面。"}
 
 @app.get("/api/schedule")
 def get_current_schedule(): 
