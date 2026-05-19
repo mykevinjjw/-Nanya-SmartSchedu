@@ -59,7 +59,25 @@ def init_from_summary():
 
     print("--- 正在從 course_summary.md 匯入 115-1 資料 ---", flush=True)
 
-    summary_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "course_summary.md")
+    # 多路徑探測：優先找當前目錄，再找上一層，最後找根目錄
+    possible_paths = [
+        "course_summary.md",
+        "/app/course_summary.md",
+        "/course_summary.md",
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "course_summary.md"),
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "course_summary.md")
+    ]
+    
+    summary_path = None
+    for p in possible_paths:
+        if os.path.exists(p):
+            summary_path = p
+            break
+            
+    if not summary_path:
+        print(f"❌ 找不到 course_summary.md。已嘗試路徑: {possible_paths}")
+        return
+
     with open(summary_path, "r", encoding="utf-8") as f:
         md_content = f.read()
 
