@@ -1,5 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends
-from fastapi import BackgroundTasks
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -7,20 +6,38 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import List, Optional
 import os
+import time
+import io
+import csv
+import uvicorn
 
 # 匯入專案模組
 from models import Teacher, Classroom, ClassGroup, Course, Base, Department, SystemSetting, course_class_association
 from scheduler import CourseScheduler, SessionLocal, engine
-import uvicorn
-
-# 初始化資料庫表
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="大學自動排課系統")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
+# 初始化資料庫表 (帶重試機制)
+def init_db():
+    retries = 5
+    while retries > 0:
+        try:
+            print(f"正在初始化資料庫... (剩餘重試次數: {retries})")
+            Base.metadata.create_all(bind=engine)
+            print("✅ 資料庫初始化成功！")
+            return
+        except Exception as e:
+            print(f"❌ 資料庫初始化失敗: {e}")
+            retries -= 1
+            time.sleep(5)
+    print("‼️ 無法連線至資料庫，請檢查 Docker 容器狀態。")
+
+@app.on_event("startup")
+async def startup_event():
+    init_db()
+
 # 掛載前端靜態檔案
-# 優先尋找容器掛載路徑，若無則尋找本地開發路徑
 frontend_paths = [
     "/app/frontend",
     "/frontend",
@@ -35,7 +52,6 @@ def read_root():
         if os.path.exists(index_file):
             return FileResponse(index_file)
     
-    # 找不到時回傳詳細錯誤資訊協助除錯
     tried_paths = [os.path.join(p, "index.html") for p in frontend_paths]
     return {
         "error": "找不到 index.html",
@@ -100,9 +116,6 @@ class SettingSchema(BaseModel):
 
 # --- API ---
 
-import io
-import csv
-
 class ImportSchema(BaseModel):
     teachers: List[dict]
     classrooms: List[dict]
@@ -111,7 +124,6 @@ class ImportSchema(BaseModel):
     settings: Optional[dict] = None
 
 def perform_bulk_import(data: ImportSchema, db: Session):
-    # 1. 清空現有資料 (按照關聯順序)
     db.execute(course_class_association.delete())
     db.query(Course).delete()
     db.query(ClassGroup).delete()
@@ -120,18 +132,15 @@ def perform_bulk_import(data: ImportSchema, db: Session):
     db.query(Department).delete()
     db.query(SystemSetting).delete()
     
-    # 建立預設系所
     dept = Department(name="預設系所")
     db.add(dept); db.flush()
 
-    # 2. 匯入教室
     rooms_map = {}
     for r in data.classrooms:
         obj = Classroom(name=r['name'])
         db.add(obj); db.flush()
         rooms_map[r['name']] = obj.id
     
-    # 3. 匯入老師
     teachers_map = {}
     for t in data.teachers:
         obj = Teacher(name=t['name'], 
@@ -139,18 +148,14 @@ def perform_bulk_import(data: ImportSchema, db: Session):
         db.add(obj); db.flush()
         teachers_map[t['name']] = obj.id
         
-    # 4. 匯入班級
     classes_map = {}
     for g in data.class_groups:
         obj = ClassGroup(name=g['name'], department_id=dept.id)
         db.add(obj); db.flush()
         classes_map[g['name']] = obj.id
 
-    # 5. 匯入課程
     for c in data.courses:
         t_id = teachers_map.get(c['teacher_name'])
-        
-        # 教室自動識別邏輯
         r_name = c.get('classroom_name')
         r_id = None
         if r_name:
@@ -162,17 +167,11 @@ def perform_bulk_import(data: ImportSchema, db: Session):
             r_id = rooms_map[r_name]
 
         obj = Course(
-            name=c['name'], 
-            credits=c['credits'], 
-            classroom_id=r_id,
-            teacher_id=t_id,
-            fixed_day=c.get('fixed_day'),
-            fixed_slot=c.get('fixed_slot'),
-            allowed_slots=c.get('allowed_slots'),
-            is_reserved=c.get('is_reserved', False),
+            name=c['name'], credits=c['credits'], classroom_id=r_id, teacher_id=t_id,
+            fixed_day=c.get('fixed_day'), fixed_slot=c.get('fixed_slot'),
+            allowed_slots=c.get('allowed_slots'), is_reserved=c.get('is_reserved', False),
             should_schedule=c.get('should_schedule', True)
         )
-        # 關聯班級 (支援逗號或垂直線分隔)
         c_classes = []
         raw_class_names = c.get('class_names', [])
         if isinstance(raw_class_names, str):
@@ -186,7 +185,6 @@ def perform_bulk_import(data: ImportSchema, db: Session):
         obj.classes = c_classes
         db.add(obj)
         
-    # 6. 匯入設定
     s = data.settings or {}
     setting = SystemSetting(
         thursday_afternoon_off=s.get('thursday_afternoon_off', True),
@@ -201,8 +199,6 @@ def perform_bulk_import(data: ImportSchema, db: Session):
     )
     db.add(setting)
     db.commit()
-
-# --- API ---
 
 @app.post("/api/import")
 def bulk_import(data: ImportSchema, db: Session = Depends(get_db)):
@@ -219,18 +215,14 @@ class CSVTextSchema(BaseModel):
 @app.post("/api/import-csv")
 def import_csv(payload: CSVTextSchema, db: Session = Depends(get_db)):
     try:
-        # 移除可能存在的 BOM 字元
         text = payload.text
-        if text.startswith('\ufeff'):
-            text = text[1:]
-        
+        if text.startswith('\ufeff'): text = text[1:]
         f = io.StringIO(text)
         reader = csv.reader(f)
         data = {"teachers": [], "classrooms": [], "class_groups": [], "courses": [], "settings": {}}
         for row in reader:
             if not row or not row[0]: continue
             rtype = row[0].lower().strip()
-            # 支援中英文類別名稱
             if rtype in ['teacher', '老師']:
                 data['teachers'].append({"name": row[1], "is_director": row[2].lower() in ['true', '是']})
             elif rtype in ['classroom', '教室']:
@@ -245,7 +237,6 @@ def import_csv(payload: CSVTextSchema, db: Session = Depends(get_db)):
                     "fixed_slot": int(row[7]) if (len(row)>7 and row[7]) else None,
                     "allowed_slots": row[8] if (len(row)>8 and row[8]) else None
                 })
-        
         perform_bulk_import(ImportSchema(**data), db)
         return {"ok": True, "message": "CSV 資料已順利匯入"}
     except Exception as e:
@@ -362,15 +353,12 @@ def delete_course(id: int, db: Session = Depends(get_db)):
 @app.post("/api/run-scheduler")
 async def run_scheduler_api(background_tasks: BackgroundTasks):
     global last_schedule_result, is_scheduling
-
-    if is_scheduling:
-        return {"ok": False, "message": "排課任務正在執行中，請稍後。"}
-
+    if is_scheduling: return {"ok": False, "message": "排課任務正在執行中，請稍後。"}
     is_scheduling = True
-
     def task():
         global last_schedule_result, is_scheduling
         try:
+            print("🚀 背景排課任務啟動...")
             scheduler = CourseScheduler()
             result = scheduler.solve()
             if result:
@@ -381,7 +369,6 @@ async def run_scheduler_api(background_tasks: BackgroundTasks):
             print(f"❌ 背景排課發生錯誤: {e}")
         finally:
             is_scheduling = False
-
     background_tasks.add_task(task)
     return {"ok": True, "message": "排課任務已在背景啟動，預計 1-3 分鐘內完成。"}
 
